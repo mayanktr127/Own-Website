@@ -15,8 +15,10 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-display: "Geist", "Inter Tight", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", "SF Mono", ui-monospace, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -34,6 +36,8 @@
   --color-butter: var(--butter);
   --color-butter-foreground: var(--butter-foreground);
   --color-mint: var(--mint);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-foreground: var(--terracotta-foreground);
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-soft: var(--ink-soft);
@@ -73,6 +77,9 @@
   --butter: oklch(0.93 0.1 100);
   --butter-foreground: oklch(0.22 0.03 90);
   --mint: oklch(0.87 0.08 158);
+
+  --terracotta: #8d5d48;
+  --terracotta-foreground: #fcf9f6;
 
   --ink: oklch(0.16 0.004 60);
   --ink-foreground: oklch(0.975 0.006 92);
@@ -136,14 +143,19 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   }
 
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "ss01";
   }
 }
 
@@ -241,4 +253,51 @@
     oklch(1 0 0 / 0.05) 26%,
     transparent 46%
   );
+}
+
+/* Radar hotspot pulse */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@utility animate-radar {
+  animation: radar-pulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Glassmorphic luxury card */
+@utility glass-card {
+  background: rgba(18, 22, 29, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+@utility glass-card-light {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 20px 40px -15px rgba(20, 20, 30, 0.15),
+    0 1px 0 rgba(255, 255, 255, 0.9) inset;
+}
+
+/* Editorial Serif Utility */
+@utility font-serif-editorial {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
 }

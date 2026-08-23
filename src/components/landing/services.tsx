@@ -13,104 +13,116 @@ const PARTNER_LOGOS = [
 const SERVICES_DATA = [
   {
     icon: Globe,
+    category: 'Web Platforms',
     title: 'Website Development',
     description:
-      'Conversion-focused marketing sites and web platforms built on modern stacks — fast, accessible and easy for your team to edit.',
+      'Conversion-focused marketing engines, design systems and headless web platforms built on Next.js — sub-second load times and 98+ Core Web Vitals.',
     bullets: [
-      'Next-gen React stacks',
-      'CMS + headless content',
-      'Core Web Vitals 95+',
+      'Next.js 15 & React 19',
+      'Headless CMS & Sanity',
+      'Core Web Vitals 98+',
     ],
-  },
-  {
-    icon: Smartphone,
-    title: 'App Development',
-    description:
-      'Native-feel iOS, Android and cross-platform apps with clean design systems, offline support and analytics baked in.',
-    bullets: [
-      'React Native & Flutter',
-      'Design systems',
-      'Store launch support',
-    ],
+    highlight: false,
   },
   {
     icon: Bot,
-    title: 'AI Automation',
+    category: 'AI & Automation',
+    title: 'AI Agents & Copilots',
     description:
-      'Agents, copilots and workflow automations that remove manual work from sales, support and operations.',
+      'Autonomous multi-agent workflows, vector knowledge bases (RAG), and reasoning copilots that eliminate manual operational bottlenecks.',
     bullets: [
-      'Custom AI agents',
-      'RAG knowledge bases',
-      'Ops workflow automation',
+      'Autonomous agent swarms',
+      'Hybrid Vector RAG',
+      'CRM & ERP Automation',
     ],
-  },
-  {
-    icon: Search,
-    title: 'SEO, AEO & GEO',
-    description:
-      'Rank in search, answer engines and generative results. Technical foundations plus content built for how people ask today.',
-    bullets: [
-      'Technical SEO audits',
-      'Answer-engine schema',
-      'AI-visibility strategy',
-    ],
-  },
-  {
-    icon: Megaphone,
-    title: 'Digital Marketing',
-    description:
-      'Paid, lifecycle and content programs that turn traffic into pipeline — measured against revenue, not vanity metrics.',
-    bullets: [
-      'Performance ads',
-      'Lifecycle email',
-      'Attribution dashboards',
-    ],
+    highlight: true, // Butter glow feature card
   },
   {
     icon: Layers,
-    title: 'SaaS Development',
+    category: 'Product Engineering',
+    title: 'SaaS Engineering',
     description:
-      'End-to-end product engineering: multi-tenant architecture, billing, dashboards and everything needed to ship a real SaaS.',
+      'End-to-end architecture: multi-tenant schema, Stripe billing, auth pipelines, and resilient cloud infrastructure to launch in weeks.',
     bullets: [
-      'MVP in 6–10 weeks',
-      'Billing & auth',
-      'Scalable cloud infra',
+      'MVP in 4–8 weeks',
+      'Multi-tenant DB & auth',
+      'Serverless edge scaling',
     ],
+    highlight: false,
+  },
+  {
+    icon: Smartphone,
+    category: 'Mobile Systems',
+    title: 'Mobile App Development',
+    description:
+      'High-polish native iOS and Android apps with 60fps gesture physics, unified design tokens, offline sync, and App Store submission support.',
+    bullets: [
+      'React Native & Expo',
+      'Unified design tokens',
+      'Full App Store launch',
+    ],
+    highlight: false,
+  },
+  {
+    icon: Search,
+    category: 'Search & LLM Indexing',
+    title: 'SEO, AEO & GEO',
+    description:
+      'Rank #1 in traditional search engines while dominating AI answer engines (ChatGPT, Perplexity, Claude) through rich entity schema graphs.',
+    bullets: [
+      'Generative engine optimization',
+      'Knowledge entity graphs',
+      'Technical SEO telemetry',
+    ],
+    highlight: false,
+  },
+  {
+    icon: Megaphone,
+    category: 'Growth Architecture',
+    title: 'Performance Marketing',
+    description:
+      'Paid acquisition, automated retention funnels, and attribution pipelines engineered directly against revenue, not vanity metrics.',
+    bullets: [
+      'High-velocity ad creative',
+      'Lifecycle automation',
+      'Custom attribution models',
+    ],
+    highlight: false,
   },
 ];
 
 export function LogoMarquee() {
   return (
-    <section className="bg-ink py-10 overflow-hidden border-y border-white/5 relative select-none">
-      <div className="max-w-6xl mx-auto px-5 mb-6 text-center">
-        <p className="text-xs uppercase font-medium tracking-[0.28em] text-ink-muted">
-          Trusted by
+    <section className="bg-zinc-950 py-10 overflow-hidden border-y border-white/10 relative select-none">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 mb-6 text-center">
+        <p className="text-xs uppercase font-mono tracking-[0.28em] text-zinc-400">
+          Trusted by fast-growing technology companies
         </p>
       </div>
 
       {/* Marquee Track with masked gradient edges */}
       <div
-        className="flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]"
+        className="flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_15%,black_85%,transparent)]"
         aria-label="Client logos"
       >
-        <div className="flex shrink-0 items-center gap-16 animate-marquee py-2">
+        <div className="flex shrink-0 items-center gap-16 sm:gap-20 animate-marquee py-2">
           {PARTNER_LOGOS.map((logo, idx) => (
             <span
               key={`logo-1-${idx}`}
-              className="text-2xl sm:text-3xl font-display font-semibold tracking-tight text-ink-muted/70 hover:text-ink-foreground transition-colors cursor-default whitespace-nowrap"
+              className="text-2xl sm:text-3xl font-display font-semibold tracking-tight text-zinc-500 hover:text-white transition-colors cursor-default whitespace-nowrap"
             >
               {logo}
             </span>
           ))}
         </div>
         <div
-          className="flex shrink-0 items-center gap-16 animate-marquee py-2"
+          className="flex shrink-0 items-center gap-16 sm:gap-20 animate-marquee py-2"
           aria-hidden="true"
         >
           {PARTNER_LOGOS.map((logo, idx) => (
             <span
               key={`logo-2-${idx}`}
-              className="text-2xl sm:text-3xl font-display font-semibold tracking-tight text-ink-muted/70 hover:text-ink-foreground transition-colors cursor-default whitespace-nowrap"
+              className="text-2xl sm:text-3xl font-display font-semibold tracking-tight text-zinc-500 hover:text-white transition-colors cursor-default whitespace-nowrap"
             >
               {logo}
             </span>
@@ -123,27 +135,24 @@ export function LogoMarquee() {
 
 export function Services() {
   return (
-    <section id="services" className="py-24 sm:py-32 scroll-mt-12">
-      <div className="max-w-6xl mx-auto px-5">
-        {/* Header */}
-        <div data-reveal className="max-w-2xl mb-16 text-left">
-          <div className="bg-butter text-butter-foreground rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] inline-block shadow-sm mb-5">
-            Our services
+    <section id="services" className="py-24 sm:py-32 scroll-mt-12 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        {/* Section Header */}
+        <div data-reveal className="max-w-3xl mb-16 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-butter text-butter-foreground text-[11px] font-semibold uppercase tracking-[0.14em] shadow-xs mb-5">
+            <span>Specialized Capabilities</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.06] tracking-tight text-foreground mb-6">
-            Everything you need <br />
-            to build, launch and <br />
-            scale.
+          <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.05] tracking-tight text-foreground mb-6">
+            Engineered disciplines. <br />
+            One accountable squad.
           </h2>
-          <p className="text-[15px] leading-relaxed text-muted-foreground">
-            Six disciplines, one accountable team. We plug into your roadmap and
-            own delivery from first workshop to post-launch growth — no
-            handoffs, no agency theatre.
+          <p className="text-base leading-relaxed text-muted-foreground">
+            We operate as an integrated product unit: strategy, UI/UX architecture, full-stack engineering, and AI automation working in seamless weekly cadence.
           </p>
         </div>
 
-        {/* 6-Card Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* 6-Card Bento Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {SERVICES_DATA.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -151,32 +160,80 @@ export function Services() {
                 key={service.title}
                 data-reveal
                 data-reveal-delay={`${index * 70}`}
-                className="rounded-3xl border border-border bg-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft group"
+                className={`rounded-[32px] p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl border group relative overflow-hidden ${
+                  service.highlight
+                    ? 'bg-zinc-950 text-white border-butter/30 shadow-xl'
+                    : 'bg-card text-foreground border-border/80 shadow-soft'
+                }`}
               >
+                {/* Highlight Glow for Feature Card */}
+                {service.highlight && (
+                  <div
+                    className="absolute -top-16 -right-16 w-40 h-40 bg-butter/15 rounded-full blur-2xl pointer-events-none"
+                    aria-hidden="true"
+                  />
+                )}
+
                 <div>
-                  {/* Icon Tile */}
-                  <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-6 text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-all duration-300 shadow-xs">
-                    <Icon className="w-6 h-6" />
+                  {/* Top Bar: Icon + Category Badge */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs ${
+                        service.highlight
+                          ? 'bg-butter text-butter-foreground'
+                          : 'bg-secondary text-foreground group-hover:bg-butter group-hover:text-butter-foreground'
+                      }`}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </div>
+
+                    <span
+                      className={`text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full ${
+                        service.highlight
+                          ? 'bg-white/10 text-butter border border-white/10'
+                          : 'bg-secondary text-muted-foreground'
+                      }`}
+                    >
+                      {service.category}
+                    </span>
                   </div>
 
-                  {/* Title & Desc */}
-                  <h3 className="font-display text-xl font-medium tracking-tight text-foreground mb-3">
+                  {/* Title & Description */}
+                  <h3
+                    className={`font-display text-xl sm:text-2xl font-medium tracking-tight mb-3 ${
+                      service.highlight ? 'text-white' : 'text-foreground'
+                    }`}
+                  >
                     {service.title}
                   </h3>
-                  <p className="text-[14px] leading-relaxed text-muted-foreground mb-6">
+                  <p
+                    className={`text-sm leading-relaxed mb-6 ${
+                      service.highlight ? 'text-zinc-300' : 'text-muted-foreground'
+                    }`}
+                  >
                     {service.description}
                   </p>
                 </div>
 
-                {/* Bullets */}
-                <div className="pt-4 border-t border-border/60 flex flex-col gap-2">
+                {/* Bullets List */}
+                <div
+                  className={`pt-5 border-t flex flex-col gap-2.5 ${
+                    service.highlight ? 'border-white/10' : 'border-border/60'
+                  }`}
+                >
                   {service.bullets.map((bullet) => (
                     <div
                       key={bullet}
-                      className="flex items-center gap-2 text-xs text-foreground/80 font-medium"
+                      className={`flex items-center gap-2 text-xs font-medium ${
+                        service.highlight ? 'text-zinc-200' : 'text-foreground/80'
+                      }`}
                     >
-                      <div className="w-4 h-4 rounded-full bg-butter/30 flex items-center justify-center shrink-0">
-                        <Check className="w-2.5 h-2.5 text-butter-foreground stroke-[2.5]" />
+                      <div
+                        className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${
+                          service.highlight ? 'bg-butter/20 text-butter' : 'bg-butter/30 text-butter-foreground'
+                        }`}
+                      >
+                        <Check className="w-2.5 h-2.5 stroke-[3]" />
                       </div>
                       <span>{bullet}</span>
                     </div>

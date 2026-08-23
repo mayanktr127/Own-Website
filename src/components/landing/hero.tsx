@@ -1,228 +1,264 @@
-import { ArrowRight, Bot, Play, TrendingUp } from 'lucide-react';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { ArrowRight, ArrowUpRight, Play, Pause, RotateCcw, Sun, Zap, Sunset, Moon } from 'lucide-react';
+import { RoadServicesSignboard, MILESTONE_SERVICES } from './road-services-signboard';
+import { SystemTourModal } from './system-tour-modal';
+import { SmoothVideoCanvas } from './smooth-video-canvas';
 
-const BAR_HEIGHTS = [42, 58, 36, 74, 51, 88, 47, 63, 39, 70];
+const TRUST_LOGOS = [
+  'Meridian',
+  'STELLER',
+  'Luminar',
+  'OVERLAND',
+  'Kinetic',
+];
+
+const SCROLL_PHASES = [
+  { time: 0, label: '0s · Day Start', phase: 'Daylight Architecture', icon: Sun, scrollPercent: 0 },
+  { time: 3, label: '3s · AI Build', phase: 'Multi-Agent Sprints', icon: Zap, scrollPercent: 0.33 },
+  { time: 6, label: '6s · Sunset Scale', phase: 'SaaS Platform Scale', icon: Sunset, scrollPercent: 0.66 },
+  { time: 10, label: '10s · Night Ops', phase: 'Global 24/7 Autonomy', icon: Moon, scrollPercent: 1.0 },
+];
 
 export function Hero() {
+  const [isTourOpen, setIsTourOpen] = useState(false);
+  const [targetTime, setTargetTime] = useState(0);
+  const [videoTime, setVideoTime] = useState(0);
+  const [videoDuration, setVideoDuration] = useState(10);
+  const [isPlayingAuto, setIsPlayingAuto] = useState(false);
+  const [activeMilestoneIdx, setActiveMilestoneIdx] = useState(0);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll Scrubber Listener (10s total video, ~3s per major scroll milestone)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isPlayingAuto) return;
+
+      const container = containerRef.current;
+      if (!container) return;
+
+      const rect = container.getBoundingClientRect();
+      const scrollableHeight = container.clientHeight - window.innerHeight;
+      if (scrollableHeight <= 0) return;
+
+      const scrolled = -rect.top;
+      const progress = Math.min(Math.max(scrolled / scrollableHeight, 0), 1);
+      
+      const duration = videoDuration || 10;
+      const target = progress * duration;
+      setTargetTime(target);
+
+      // Sync milestone index (0 to 5) across 10 seconds smoothly
+      const milestoneIndex = Math.min(
+        Math.floor(progress * MILESTONE_SERVICES.length),
+        MILESTONE_SERVICES.length - 1
+      );
+      setActiveMilestoneIdx(milestoneIndex);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isPlayingAuto, videoDuration]);
+
+  // Jump to specific time/scroll position
+  const jumpToTime = (targetSeconds: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const duration = videoDuration || 10;
+    const progress = targetSeconds / duration;
+    const scrollableHeight = container.clientHeight - window.innerHeight;
+    const targetScrollY = container.offsetTop + progress * scrollableHeight;
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleSelectMilestone = (idx: number) => {
+    setActiveMilestoneIdx(idx);
+    const duration = videoDuration || 10;
+    const targetSec = (idx / (MILESTONE_SERVICES.length - 1)) * duration;
+    jumpToTime(targetSec);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsPlayingAuto(!isPlayingAuto);
+  };
+
+  const handleTimeUpdate = useCallback((time: number) => {
+    setVideoTime(time);
+  }, []);
+
+  const handleDuration = useCallback((dur: number) => {
+    setVideoDuration(dur);
+  }, []);
+
+  // Determine current active phase name
+  const currentPhase =
+    videoTime < 3.0
+      ? '0s – 3s · Daylight Architecture'
+      : videoTime < 6.0
+      ? '3s – 6s · Multi-Agent Build'
+      : videoTime < 9.0
+      ? '6s – 9s · Platform Scale'
+      : '9s – 10s · 24/7 Night Ops';
+
   return (
-    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
-      {/* Aurora glow background */}
-      <div
-        className="aurora absolute inset-x-0 -top-24 h-[620px] opacity-90 blur-[2px] pointer-events-none -z-10"
-        aria-hidden="true"
-      />
+    <>
+      {/* 320vh Scroll Runway for silky smooth 10s video scrubbing */}
+      <section
+        ref={containerRef}
+        className="relative h-[320vh] w-full"
+      >
+        {/* Sticky 100vh Viewport */}
+        <div className="sticky top-0 h-[100dvh] w-full overflow-hidden flex flex-col justify-between pt-24 pb-8 sm:pt-28 sm:pb-12">
+          {/* High-Performance 60FPS Smooth Video Canvas with Dual-Buffer Crossfade */}
+          <SmoothVideoCanvas
+            videoSrc="/assets/People_working_during_day_night_202608232052.mp4"
+            posterSrc="/assets/greenfield-hero.jpg"
+            targetTime={targetTime}
+            isPlayingAuto={isPlayingAuto}
+            onTimeUpdate={handleTimeUpdate}
+            onDuration={handleDuration}
+          />
 
-      <div className="max-w-6xl mx-auto px-5 grid lg:grid-cols-[1.05fr_1fr] gap-12 items-center">
-        {/* Left Column — Value Prop */}
-        <div data-reveal className="flex flex-col items-start text-left">
-          {/* Eyebrow */}
-          <div className="bg-butter text-butter-foreground rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] inline-flex items-center gap-2 shadow-sm mb-6">
-            <Bot className="w-3.5 h-3.5" />
-            <span>AI-native product studio</span>
-          </div>
-
-          {/* Heading */}
-          <h1 className="font-display text-[2.6rem] leading-[1.03] sm:text-6xl font-medium tracking-tight text-foreground mb-6">
-            We build the software <br />
-            that grows your <br />
-            business.
-          </h1>
-
-          {/* Paragraph */}
-          <p className="text-[15px] leading-relaxed text-muted-foreground max-w-xl mb-8">
-            Nexora is a SaaS development studio for founders and scaling teams.
-            Websites, mobile apps, AI automation and search-first marketing —
-            designed, engineered and measured under one roof.
-          </p>
-
-          {/* Buttons */}
-          <div className="flex flex-wrap items-center gap-3.5 mb-10">
-            <a
-              href="#contact"
-              className="bg-ink text-ink-foreground rounded-full px-6 py-3.5 text-sm font-medium hover:scale-[1.03] transition-transform duration-200 inline-flex items-center gap-2 group shadow-sm"
-            >
-              <span>Start your project</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </a>
-            <a
-              href="#work"
-              className="bg-card text-foreground border border-border rounded-full px-6 py-3.5 text-sm font-medium hover:scale-[1.02] transition-transform duration-200 inline-flex items-center gap-2 shadow-sm"
-            >
-              <Play className="w-3.5 h-3.5 fill-current" />
-              <span>See our work</span>
-            </a>
-          </div>
-
-          {/* Social Proof */}
-          <div className="flex items-center gap-4 pt-2">
-            <div className="flex -space-x-2.5">
-              <div className="w-8 h-8 rounded-full bg-ink text-ink-foreground text-[11px] font-semibold flex items-center justify-center border-2 border-background shadow-xs">
-                NX
-              </div>
-              <div className="w-8 h-8 rounded-full bg-ink text-ink-foreground text-[11px] font-semibold flex items-center justify-center border-2 border-background shadow-xs">
-                AR
-              </div>
-              <div className="w-8 h-8 rounded-full bg-ink text-ink-foreground text-[11px] font-semibold flex items-center justify-center border-2 border-background shadow-xs">
-                KJ
-              </div>
-              <div className="w-8 h-8 rounded-full bg-ink text-ink-foreground text-[11px] font-semibold flex items-center justify-center border-2 border-background shadow-xs">
-                MS
-              </div>
+          {/* Top Sky Area: Exact Reference Typography & Logo Ribbon */}
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full flex flex-col items-start text-left pt-2 sm:pt-4">
+            {/* Pill Eyebrow with Live Scroll-Time Phase Indicator */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-black/10 text-zinc-950 text-xs font-medium mb-4 shadow-sm transition-all duration-300">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-semibold text-emerald-800 uppercase tracking-wider text-[11px] font-mono">
+                {currentPhase}
+              </span>
+              <span className="text-zinc-300">·</span>
+              <span className="text-zinc-700">Scroll to advance video</span>
+              <ArrowRight className="w-3 h-3 text-zinc-600" />
             </div>
-            <div>
-              <div className="text-sm font-semibold text-foreground">
-                120+ launches
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Trusted by startups and enterprise teams across 14 countries.
-              </div>
+
+            {/* Main Headline (Exact Sans Grotesque style from reference image) */}
+            <h1 className="font-display text-4xl sm:text-6xl lg:text-[4.2rem] font-medium leading-[1.06] tracking-tight text-zinc-950 mb-6 drop-shadow-xs max-w-4xl">
+              One unified system to build, <br />
+              test, ship, and scale software
+            </h1>
+
+            {/* Floating Logo Strip (Exact reference layout floating in sky) */}
+            <div className="flex flex-wrap items-center gap-6 sm:gap-12 opacity-85 mb-4">
+              {TRUST_LOGOS.map((logo) => (
+                <span
+                  key={logo}
+                  className="font-display font-bold text-sm sm:text-base tracking-widest text-zinc-800 uppercase hover:text-zinc-950 transition-colors cursor-default"
+                >
+                  {logo}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
 
-        {/* Right Column — MacBook Device Frame with Dashboard Mock */}
-        <div
-          data-reveal
-          data-reveal-delay="150"
-          className="overflow-hidden lg:-mr-24 xl:-mr-40 relative flex justify-center lg:justify-end"
-          style={{ maxHeight: '440px' }}
-        >
-          <div className="w-full max-w-[620px] lg:[transform:perspective(1800px)_rotateY(-7deg)_rotateX(2deg)] transition-transform duration-500">
-            {/* Device Bezel */}
-            <div className="device-bezel rounded-[26px] p-[10px] pb-[14px] sm:p-3 sm:pb-4 shadow-2xl relative">
-              {/* Top Notch & Camera */}
-              <div className="h-[18px] w-[104px] sm:h-5 sm:w-[128px] rounded-b-[10px] bg-ink mx-auto flex items-center justify-center relative z-20 shadow-xs">
-                <div className="w-1.5 h-1.5 rounded-full bg-black/80 ring-1 ring-white/10" />
-              </div>
+          {/* Lower Ground Area: Road Milestone Signboard positioned on the road */}
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full flex flex-col lg:flex-row items-end justify-between gap-6 my-auto">
+            {/* Left CTA & Blueprint Trigger */}
+            <div className="flex flex-wrap items-center gap-3 bg-white/80 backdrop-blur-md p-2 rounded-full border border-black/10 shadow-md">
+              <a
+                href="#contact"
+                className="bg-zinc-950 hover:bg-black text-white rounded-full px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-wide inline-flex items-center gap-2 transition-all duration-300 shadow-md hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span>Start Project</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
 
-              {/* Inner Screen */}
-              <div className="device-glass rounded-[18px] bg-card text-foreground overflow-hidden relative shadow-[0_0_90px_20px_oklch(0_0_0/0.10)_inset] border border-black/10">
-                {/* Sheen reflection */}
-                <div
-                  className="device-sheen absolute inset-0 pointer-events-none z-30"
-                  aria-hidden="true"
-                />
+              <button
+                type="button"
+                onClick={() => setIsTourOpen(true)}
+                className="bg-white hover:bg-zinc-100 text-zinc-950 rounded-full px-5 py-2.5 text-xs sm:text-sm font-medium inline-flex items-center gap-2 transition-all duration-200 cursor-pointer shadow-xs"
+              >
+                <span>System Blueprint</span>
+              </button>
+            </div>
 
-                {/* Dashboard Mock Content */}
-                <div className="p-4 sm:p-5 text-left select-none relative z-10">
-                  {/* Console Header */}
-                  <div className="flex items-center justify-between border-b border-border pb-3 mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-md bg-ink flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-[2px] bg-butter" />
-                      </div>
-                      <span className="font-display font-medium text-xs sm:text-sm text-foreground">
-                        Nexora Console
-                      </span>
-                    </div>
+            {/* Right: Synchronized Road Services Signboard */}
+            <div data-reveal className="w-full max-w-[480px]">
+              <RoadServicesSignboard
+                controlledIdx={activeMilestoneIdx}
+                videoTime={videoTime}
+                onSelectMilestone={handleSelectMilestone}
+              />
+            </div>
+          </div>
 
-                    <div className="flex items-center gap-1.5 bg-secondary/80 rounded-full p-0.5 text-[11px]">
-                      <span className="bg-ink text-ink-foreground px-2.5 py-0.5 rounded-full font-medium shadow-xs">
-                        Overview
-                      </span>
-                      <span className="text-muted-foreground px-2 py-0.5">
-                        Pipeline
-                      </span>
-                      <span className="text-muted-foreground px-2 py-0.5 hidden sm:inline">
-                        Automations
-                      </span>
-                    </div>
+          {/* Bottom Grounded 10-Second Video Scrubber HUD */}
+          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full mt-4">
+            <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-black/10 px-5 py-3 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-900 text-xs">
+              {/* Playhead Time & Controls */}
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={toggleAutoPlay}
+                  className="w-8 h-8 rounded-xl bg-zinc-950 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
+                  aria-label={isPlayingAuto ? 'Pause video' : 'Play video continuous'}
+                >
+                  {isPlayingAuto ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
+                </button>
+
+                <div className="text-left font-mono">
+                  <div className="font-bold text-zinc-950 text-xs flex items-center gap-1.5">
+                    <span>⏱️ {videoTime.toFixed(1)}s / 10.0s</span>
+                    <span className="text-[10px] text-zinc-500 font-normal">({Math.round((videoTime / 10) * 100)}% Smooth Scroll Scrubbed)</span>
                   </div>
-
-                  {/* Greeting */}
-                  <div className="mb-4">
-                    <h3 className="font-display text-base sm:text-lg font-medium text-foreground">
-                      Good morning, team.
-                    </h3>
-                    <p className="text-xs text-muted-foreground">
-                      Delivery, growth and automation — one live view.
-                    </p>
-                  </div>
-
-                  {/* Three Stat Cards */}
-                  <div className="grid grid-cols-3 gap-2.5 mb-4">
-                    {/* Stat 1 */}
-                    <div className="bg-secondary/70 rounded-2xl p-3 border border-border/50">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[10px] sm:text-[11px] text-muted-foreground">
-                          Projects shipped
-                        </span>
-                        <span className="text-[10px] font-medium text-emerald-600 inline-flex items-center">
-                          +4.4%
-                        </span>
-                      </div>
-                      <div className="font-display text-lg sm:text-xl font-semibold text-foreground">
-                        128
-                      </div>
-                    </div>
-
-                    {/* Stat 2 */}
-                    <div className="bg-secondary/70 rounded-2xl p-3 border border-border/50">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[10px] sm:text-[11px] text-muted-foreground">
-                          Organic clicks
-                        </span>
-                        <span className="text-[10px] font-medium text-emerald-600 inline-flex items-center">
-                          +12.1%
-                        </span>
-                      </div>
-                      <div className="font-display text-lg sm:text-xl font-semibold text-foreground">
-                        178,125
-                      </div>
-                    </div>
-
-                    {/* Stat 3 (Butter Highlight) */}
-                    <div className="bg-butter text-butter-foreground rounded-2xl p-3 shadow-xs">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[10px] sm:text-[11px] font-medium opacity-80">
-                          Hours automated
-                        </span>
-                        <span className="text-[10px] font-bold text-butter-foreground">
-                          +9.8%
-                        </span>
-                      </div>
-                      <div className="font-display text-lg sm:text-xl font-bold">
-                        2,940
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pipeline Velocity Panel with 10-bar chart */}
-                  <div className="bg-secondary/50 rounded-2xl p-3.5 border border-border/60">
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-1.5">
-                        <TrendingUp className="w-3.5 h-3.5 text-muted-foreground" />
-                        <span className="text-xs font-medium text-foreground">
-                          Pipeline velocity
-                        </span>
-                      </div>
-                      <span className="bg-emerald-500/10 text-emerald-700 text-[10px] font-semibold px-2 py-0.5 rounded-full border border-emerald-500/20">
-                        +$72,000
-                      </span>
-                    </div>
-
-                    {/* Bar chart */}
-                    <div className="h-16 flex items-end justify-between gap-1 sm:gap-2 px-1">
-                      {BAR_HEIGHTS.map((height, idx) => (
-                        <div
-                          key={idx}
-                          className="flex-1 flex flex-col items-center gap-1 group/bar"
-                        >
-                          <div
-                            className={`w-full rounded-t-md transition-all duration-300 ${
-                              idx === 5 ? 'bg-butter shadow-xs' : 'bg-muted-foreground/30'
-                            }`}
-                            style={{ height: `${height}%` }}
-                          />
-                        </div>
-                      ))}
-                    </div>
+                  <div className="text-[10px] text-zinc-500">
+                    {isPlayingAuto ? 'Continuous 60fps Playback' : 'Scroll down smoothly to scrub daylight -> night'}
                   </div>
                 </div>
               </div>
+
+              {/* 3-Second Scroll Milestone Quick Jump Buttons */}
+              <div className="flex items-center gap-1.5 flex-wrap">
+                {SCROLL_PHASES.map((phase) => {
+                  const Icon = phase.icon;
+                  const isActive =
+                    (phase.time === 0 && videoTime < 3.0) ||
+                    (phase.time === 3 && videoTime >= 3.0 && videoTime < 6.0) ||
+                    (phase.time === 6 && videoTime >= 6.0 && videoTime < 9.0) ||
+                    (phase.time === 10 && videoTime >= 9.0);
+
+                  return (
+                    <button
+                      key={phase.label}
+                      type="button"
+                      onClick={() => jumpToTime(phase.time)}
+                      className={`px-3 py-1.5 rounded-xl text-[11px] font-medium inline-flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
+                        isActive
+                          ? 'bg-zinc-950 text-white shadow-xs scale-102 font-semibold'
+                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700'
+                      }`}
+                    >
+                      <Icon className="w-3 h-3" />
+                      <span>{phase.label}</span>
+                    </button>
+                  );
+                })}
+
+                <button
+                  type="button"
+                  onClick={() => jumpToTime(0)}
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors cursor-pointer"
+                  title="Reset to 0s"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Interactive System Tour Modal */}
+      <SystemTourModal
+        isOpen={isTourOpen}
+        onClose={() => setIsTourOpen(false)}
+      />
+    </>
   );
 }

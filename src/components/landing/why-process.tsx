@@ -5,67 +5,67 @@ const WHY_BENEFITS = [
     icon: Gauge,
     title: 'Ship in weeks, not quarters',
     description:
-      'Fixed-scope sprints with a working build in your hands every Friday.',
+      'Fixed-scope sprints with live staging builds in your hands every single Friday.',
   },
   {
     icon: Users,
-    title: 'One senior team, end to end',
+    title: 'One senior squad, end to end',
     description:
-      'Strategy, design, engineering and growth sit in the same room.',
+      'Product strategy, Figma design, AI architecture, and full-stack engineering in one room.',
   },
   {
     icon: Sparkles,
-    title: 'AI woven into the product',
+    title: 'AI woven into the architecture',
     description:
-      "Automation isn't an add-on — it's designed into the workflow from day one.",
+      "Automation isn't an afterthought — it is engineered into the core data schema from day one.",
   },
   {
     icon: ShieldCheck,
-    title: 'Built to scale safely',
+    title: 'Engineered to scale securely',
     description:
-      'Typed codebases, tests, observability and infra that survives growth.',
+      'Strict TypeScript, automated testing suites, SOC2 observability, and global edge infra.',
   },
 ];
 
 const STATS_DATA = [
-  { value: '120+', label: 'Products delivered' },
-  { value: '89%', label: 'Clients who re-engage' },
-  { value: '2.9k', label: 'Hours automated monthly' },
-  { value: '14', label: 'Countries served' },
+  { value: '140+', label: 'Digital Products Shipped' },
+  { value: '91%', label: 'Founders Who Re-engage' },
+  { value: '3.4k', label: 'Hours Automated / Month' },
+  { value: '16', label: 'Countries Represented' },
 ];
 
 const PROCESS_STEPS = [
   {
     step: '01',
-    title: 'Discover',
+    title: 'Discover & Architect',
     progress: 'w-1/4',
     percent: '25%',
     description:
-      'A focused workshop to map users, constraints and the metric that defines success.',
+      'Intensive alignment workshop mapping user journeys, technical constraints, and key revenue metrics.',
   },
   {
     step: '02',
-    title: 'Design',
+    title: 'Design System & UX',
     progress: 'w-2/4',
     percent: '50%',
     description:
-      'Clickable prototypes and a design system your engineers can build from immediately.',
+      'Figma component tokens and responsive prototypes ready for instant engineering translation.',
   },
   {
     step: '03',
-    title: 'Build',
+    title: 'Engine & AI Build',
     progress: 'w-3/4',
     percent: '75%',
     description:
-      'Two-week sprints, live staging links and weekly demos so nothing is a surprise.',
+      'Two-week sprints, live staging deployments, and weekly demos ensuring zero surprises.',
   },
   {
     step: '04',
-    title: 'Grow',
+    title: 'Launch & Compound',
     progress: 'w-full',
     percent: '100%',
     description:
-      'Launch, instrument, then improve with SEO, automation and performance marketing.',
+      'Production release, instrumentation, SEO/AEO indexing, and AI agent workflow optimization.',
   },
 ];
 
@@ -73,28 +73,31 @@ export function WhyUs() {
   return (
     <section
       id="why"
-      className="bg-ink text-ink-foreground py-24 sm:py-32 scroll-mt-12 relative overflow-hidden"
+      className="bg-zinc-950 text-white py-24 sm:py-32 scroll-mt-12 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-5 relative z-10">
+      {/* Background ambient lighting */}
+      <div
+        className="absolute top-0 right-1/4 w-96 h-96 bg-butter/5 rounded-full blur-3xl pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
         {/* Section Header */}
-        <div data-reveal className="max-w-2xl mb-16 text-left">
-          <div className="bg-butter text-butter-foreground rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] inline-block shadow-sm mb-5">
-            Key benefits
+        <div data-reveal className="max-w-3xl mb-16 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-butter text-butter-foreground text-[11px] font-semibold uppercase tracking-[0.14em] shadow-xs mb-5">
+            <span>Competitive Advantage</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.06] tracking-tight text-ink-foreground mb-6">
-            Why teams choose <br />
-            Nexora as their <br />
-            build partner
+          <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.05] tracking-tight text-white mb-6">
+            Why visionary founders choose <br />
+            Nexora as their build partner
           </h2>
-          <p className="text-[15px] leading-relaxed text-ink-muted">
-            We're built for teams that value speed, clarity and compounding
-            results. You get senior operators who care about the metric behind
-            the feature.
+          <p className="text-base leading-relaxed text-zinc-400">
+            We are built for teams that demand velocity, architectural excellence, and compounding outcomes. You partner directly with senior operators who care about the business metric behind every line of code.
           </p>
         </div>
 
         {/* 2-Column Content */}
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
           {/* Left Column — 4 Benefits */}
           <div className="flex flex-col gap-4">
             {WHY_BENEFITS.map((benefit, idx) => {
@@ -104,16 +107,16 @@ export function WhyUs() {
                   key={benefit.title}
                   data-reveal
                   data-reveal-delay={`${idx * 70}`}
-                  className="bg-ink-soft rounded-3xl p-6 border border-white/5 flex gap-4 items-start transition-all duration-300 hover:-translate-y-1 hover:border-white/10"
+                  className="bg-zinc-900/90 rounded-[28px] p-6 sm:p-7 border border-white/10 flex gap-4 items-start transition-all duration-300 hover:-translate-y-1 hover:border-white/20 shadow-lg group"
                 >
-                  <div className="w-11 h-11 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center shrink-0 shadow-xs">
-                    <Icon className="w-5 h-5" />
+                  <div className="w-12 h-12 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
+                    <Icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-display text-lg font-medium tracking-tight text-ink-foreground mb-1">
+                    <h3 className="font-display text-lg sm:text-xl font-medium tracking-tight text-white mb-1.5">
                       {benefit.title}
                     </h3>
-                    <p className="text-[14px] leading-relaxed text-ink-muted">
+                    <p className="text-sm leading-relaxed text-zinc-400">
                       {benefit.description}
                     </p>
                   </div>
@@ -122,16 +125,16 @@ export function WhyUs() {
             })}
           </div>
 
-          {/* Right Column — 2x2 Stats + Butter Banner */}
+          {/* Right Column — 2x2 Stats + Butter Card */}
           <div data-reveal data-reveal-delay="150" className="flex flex-col gap-4">
             {/* 2x2 Stats Grid */}
-            <div className="bg-ink-soft rounded-3xl p-8 border border-white/5 grid grid-cols-2 gap-8">
+            <div className="bg-zinc-900/90 rounded-[32px] p-8 border border-white/10 grid grid-cols-2 gap-8 shadow-lg">
               {STATS_DATA.map((stat) => (
                 <div key={stat.label}>
-                  <div className="font-display text-4xl sm:text-5xl font-medium tracking-tight text-ink-foreground mb-2">
+                  <div className="font-display text-4xl sm:text-5xl font-medium tracking-tight text-white mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-xs sm:text-sm text-ink-muted">
+                  <div className="text-xs sm:text-sm text-zinc-400 font-medium">
                     {stat.label}
                   </div>
                 </div>
@@ -139,12 +142,15 @@ export function WhyUs() {
             </div>
 
             {/* Butter ROI Card */}
-            <div className="bg-butter text-butter-foreground rounded-3xl p-7 shadow-soft transition-transform duration-300 hover:-translate-y-1">
-              <h3 className="font-display text-xl sm:text-2xl font-medium tracking-tight leading-snug mb-2">
-                Average 3.4× return on the first year of engagement.
+            <div className="bg-butter text-butter-foreground rounded-[32px] p-8 shadow-xl transition-transform duration-300 hover:-translate-y-1">
+              <div className="text-[11px] font-mono uppercase tracking-wider opacity-80 mb-2">
+                Proven Track Record
+              </div>
+              <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight leading-snug mb-3">
+                Average 3.6× return on investment in the first year.
               </h3>
-              <p className="text-xs sm:text-sm text-butter-foreground/80 font-medium">
-                Measured across 40 client engagements, 2023–2026.
+              <p className="text-xs sm:text-sm text-butter-foreground/90 font-medium">
+                Audited across 50+ client product engagements, 2023–2026.
               </p>
             </div>
           </div>
@@ -156,34 +162,37 @@ export function WhyUs() {
 
 export function Process() {
   return (
-    <section id="process" className="py-24 sm:py-32 scroll-mt-12 bg-background">
-      <div className="max-w-6xl mx-auto px-5">
+    <section id="process" className="py-24 sm:py-32 scroll-mt-12 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8">
         {/* Header */}
-        <div data-reveal className="max-w-2xl mb-16 text-left">
-          <div className="bg-butter text-butter-foreground rounded-full px-3.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] inline-block shadow-sm mb-5">
-            How we work
+        <div data-reveal className="max-w-3xl mb-16 text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-butter text-butter-foreground text-[11px] font-semibold uppercase tracking-[0.14em] shadow-xs mb-5">
+            <span>Execution Framework</span>
           </div>
-          <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.06] tracking-tight text-foreground">
-            A process that removes guesswork.
+          <h2 className="font-display text-4xl sm:text-5xl font-medium leading-[1.05] tracking-tight text-foreground mb-4">
+            A battle-tested process that removes guesswork.
           </h2>
+          <p className="text-base leading-relaxed text-muted-foreground">
+            From initial requirements to post-launch scaling, every sprint is engineered for transparency and measurable outcomes.
+          </p>
         </div>
 
         {/* 4 Process Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {PROCESS_STEPS.map((item, index) => (
             <div
               key={item.step}
               data-reveal
               data-reveal-delay={`${index * 80}`}
-              className="rounded-3xl border border-border bg-card p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft"
+              className="rounded-[32px] border border-border bg-card p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group"
             >
               <div>
                 {/* Step number & label */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="font-display text-2xl font-semibold text-foreground/40">
+                  <span className="font-display text-3xl font-semibold text-foreground/30 group-hover:text-butter transition-colors">
                     {item.step}
                   </span>
-                  <span className="text-xs font-semibold text-muted-foreground">
+                  <span className="text-xs font-mono font-semibold text-muted-foreground">
                     {item.percent}
                   </span>
                 </div>
@@ -191,7 +200,7 @@ export function Process() {
                 {/* Progress bar */}
                 <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mb-6">
                   <div
-                    className={`h-full bg-butter rounded-full ${item.progress}`}
+                    className={`h-full bg-butter rounded-full transition-all duration-500 ${item.progress}`}
                   />
                 </div>
 
@@ -201,7 +210,7 @@ export function Process() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-[14px] leading-relaxed text-muted-foreground">
+                <p className="text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>
               </div>

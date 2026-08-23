@@ -1,5 +1,6 @@
 import { Hero } from '../components/landing/hero';
 import { LogoMarquee, Services } from '../components/landing/services';
+import { SprintBookingSection } from '../components/landing/sprint-booking-section';
 import { WhyUs, Process } from '../components/landing/why-process';
 import {
   Work,
@@ -15,6 +16,7 @@ export function HomePage() {
       <Hero />
       <LogoMarquee />
       <Services />
+      <SprintBookingSection />
       <WhyUs />
       <Process />
       <Work />
