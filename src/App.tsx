@@ -4,6 +4,7 @@ import { ScrollToTop } from './components/common/scroll-to-top';
 import { SiteNav } from './components/landing/site-nav';
 import { SiteFooter } from './components/landing/sections';
 import { Toaster } from 'sonner';
+import { SmoothScrollProvider } from './lib/lenis-scroll';
 
 // Pages
 import HomePage from './pages/home-page';
@@ -21,7 +22,8 @@ export function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-butter selection:text-butter-foreground">
+      <SmoothScrollProvider>
+        <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-butter selection:text-butter-foreground">
         {/* Route change scroll-to-top handler */}
         <ScrollToTop />
 
@@ -49,6 +51,7 @@ export function App() {
         {/* Global Footer */}
         <SiteFooter />
       </div>
+      </SmoothScrollProvider>
     </BrowserRouter>
   );
 }

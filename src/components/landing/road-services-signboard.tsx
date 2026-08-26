@@ -23,7 +23,7 @@ export const MILESTONE_SERVICES: ServiceMilestone[] = [
     metrics: 'Next.js 15 · Sanity · Tailored Motion',
     icon: Globe,
     link: '#services',
-    timeRange: '0.0s – 3.0s · Day Phase',
+    timeRange: '0.0s – 1.8s · Daylight',
   },
   {
     mile: '02',
@@ -34,7 +34,7 @@ export const MILESTONE_SERVICES: ServiceMilestone[] = [
     metrics: 'Claude 3.5 · LangGraph · Vector DB',
     icon: Bot,
     link: '#services',
-    timeRange: '3.0s – 6.0s · Sprints',
+    timeRange: '1.8s – 3.6s · AI Sprints',
   },
   {
     mile: '03',
@@ -45,7 +45,7 @@ export const MILESTONE_SERVICES: ServiceMilestone[] = [
     metrics: 'Postgres · Edge Cluster · SOC2 Prep',
     icon: Layers,
     link: '#services',
-    timeRange: '6.0s – 9.0s · Scale',
+    timeRange: '3.6s – 5.4s · Scale Ops',
   },
   {
     mile: '04',
@@ -56,7 +56,7 @@ export const MILESTONE_SERVICES: ServiceMilestone[] = [
     metrics: 'React Native · Expo · App Store Ready',
     icon: Smartphone,
     link: '#services',
-    timeRange: '8.0s – 10.0s · Ops',
+    timeRange: '5.4s – 7.2s · Mobile Hub',
   },
   {
     mile: '05',
@@ -67,7 +67,7 @@ export const MILESTONE_SERVICES: ServiceMilestone[] = [
     metrics: 'Entity Schema · LLM Citations · Analytics',
     icon: Search,
     link: '#services',
-    timeRange: 'Ongoing Compounding',
+    timeRange: '7.2s – 8.8s · Sunset Index',
   },
   {
     mile: '06',
@@ -78,7 +78,7 @@ export const MILESTONE_SERVICES: ServiceMilestone[] = [
     metrics: 'Attribution Dashboards · Ad Creative',
     icon: Megaphone,
     link: '#services',
-    timeRange: 'Compounding Scale',
+    timeRange: '8.8s – 10.0s · Night Shift',
   },
 ];
 
