@@ -58,48 +58,81 @@ export function Work() {
           </p>
         </div>
 
-        {/* 3 Ink Cards */}
+        {/* 3 Alternating Work Cards (Inverted: 0 & 2 Light, 1 Black) */}
         <div className="grid lg:grid-cols-3 gap-6">
-          {WORK_OUTCOMES.map((item, idx) => (
-            <div
-              key={item.client}
-              data-reveal
-              data-reveal-delay={`${idx * 80}`}
-              className="rounded-[32px] bg-zinc-950 text-white p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 border border-white/10 shadow-2xl group relative overflow-hidden"
-            >
+          {WORK_OUTCOMES.map((item, idx) => {
+            const isDark = idx % 2 === 1; // Inverted: Center card (1) is Black, Side cards (0 & 2) are Light
+            return (
               <div
-                className="absolute top-0 right-0 w-32 h-32 bg-butter/5 rounded-full blur-2xl pointer-events-none"
-                aria-hidden="true"
-              />
+                key={item.client}
+                data-reveal
+                data-reveal-delay={`${idx * 80}`}
+                className={`rounded-[32px] p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 border group relative overflow-hidden ${
+                  isDark
+                    ? 'bg-zinc-950 text-white border-white/10 shadow-2xl hover:border-butter/30'
+                    : 'bg-card text-foreground border-border shadow-soft hover:shadow-xl'
+                }`}
+              >
+                {isDark && (
+                  <div
+                    className="absolute top-0 right-0 w-32 h-32 bg-butter/5 rounded-full blur-2xl pointer-events-none"
+                    aria-hidden="true"
+                  />
+                )}
 
-              <div>
-                <div className="font-serif-editorial text-5xl sm:text-6xl font-medium tracking-tight text-butter mb-6">
-                  {item.metric}
-                </div>
-                <div className="text-xs uppercase font-mono tracking-wider text-zinc-400 mb-2">
-                  {item.category}
-                </div>
-                <h3 className="font-display text-2xl font-semibold text-white mb-4">
-                  {item.client}
-                </h3>
-                <p className="text-sm leading-relaxed text-zinc-300 mb-6">
-                  {item.outcome}
-                </p>
-              </div>
-
-              {/* Tags */}
-              <div className="pt-6 border-t border-white/10 flex flex-wrap gap-2">
-                {item.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-400"
+                <div>
+                  <div
+                    className={`font-serif-editorial text-5xl sm:text-6xl font-medium tracking-tight mb-6 ${
+                      isDark ? 'text-butter' : 'text-foreground'
+                    }`}
                   >
-                    {tag}
-                  </span>
-                ))}
+                    {item.metric}
+                  </div>
+                  <div
+                    className={`text-xs uppercase font-mono tracking-wider mb-2 ${
+                      isDark ? 'text-zinc-400' : 'text-muted-foreground'
+                    }`}
+                  >
+                    {item.category}
+                  </div>
+                  <h3
+                    className={`font-display text-2xl font-semibold mb-4 ${
+                      isDark ? 'text-white' : 'text-foreground'
+                    }`}
+                  >
+                    {item.client}
+                  </h3>
+                  <p
+                    className={`text-sm leading-relaxed mb-6 ${
+                      isDark ? 'text-zinc-300' : 'text-muted-foreground'
+                    }`}
+                  >
+                    {item.outcome}
+                  </p>
+                </div>
+
+                {/* Tags */}
+                <div
+                  className={`pt-6 border-t flex flex-wrap gap-2 ${
+                    isDark ? 'border-white/10' : 'border-border/60'
+                  }`}
+                >
+                  {item.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className={`text-[11px] font-mono px-2.5 py-1 rounded-full ${
+                        isDark
+                          ? 'bg-white/5 border border-white/10 text-zinc-400'
+                          : 'bg-secondary border border-border text-muted-foreground'
+                      }`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -154,43 +187,85 @@ export function Testimonials() {
           </h2>
         </div>
 
-        {/* 3 Cards */}
+        {/* 3 Alternating Testimonial Cards */}
         <div className="grid lg:grid-cols-3 gap-6">
-          {TESTIMONIALS_DATA.map((item, idx) => (
-            <div
-              key={item.author}
-              data-reveal
-              data-reveal-delay={`${idx * 80}`}
-              className="rounded-[32px] bg-card p-8 border border-border flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl shadow-soft"
-            >
-              <div>
-                {/* 5 Stars */}
-                <div className="flex items-center gap-1 text-amber-400 mb-6">
-                  {[...Array(item.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" />
-                  ))}
-                </div>
+          {TESTIMONIALS_DATA.map((item, idx) => {
+            const isDark = idx % 2 === 1; // Alternating: Center card (1) is Black
+            return (
+              <div
+                key={item.author}
+                data-reveal
+                data-reveal-delay={`${idx * 80}`}
+                className={`rounded-[32px] p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 border relative overflow-hidden ${
+                  isDark
+                    ? 'bg-zinc-950 text-white border-white/10 shadow-2xl hover:border-butter/30 hover:shadow-2xl'
+                    : 'bg-card text-foreground border-border shadow-soft hover:shadow-xl'
+                }`}
+              >
+                {/* Subtle Glow for Black Card */}
+                {isDark && (
+                  <div
+                    className="absolute -top-12 -right-12 w-32 h-32 bg-butter/10 rounded-full blur-2xl pointer-events-none"
+                    aria-hidden="true"
+                  />
+                )}
 
-                <blockquote className="font-display text-lg font-light leading-relaxed text-foreground mb-8">
-                  “{item.quote}”
-                </blockquote>
-              </div>
-
-              <div className="flex items-center gap-3.5 pt-6 border-t border-border/60">
-                <div className="w-11 h-11 rounded-2xl bg-zinc-950 text-white text-xs font-semibold flex items-center justify-center shadow-xs">
-                  {item.avatar}
-                </div>
                 <div>
-                  <div className="font-semibold text-sm text-foreground">
-                    {item.author}
+                  {/* 5 Stars */}
+                  <div className="flex items-center gap-1 text-amber-400 mb-6">
+                    {[...Array(item.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-current" />
+                    ))}
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    {item.role}, <span className="font-medium text-foreground/80">{item.company}</span>
+
+                  <blockquote
+                    className={`font-display text-lg font-light leading-relaxed mb-8 ${
+                      isDark ? 'text-zinc-100' : 'text-foreground'
+                    }`}
+                  >
+                    “{item.quote}”
+                  </blockquote>
+                </div>
+
+                <div
+                  className={`flex items-center gap-3.5 pt-6 border-t ${
+                    isDark ? 'border-white/10' : 'border-border/60'
+                  }`}
+                >
+                  <div
+                    className={`w-11 h-11 rounded-2xl text-xs font-semibold flex items-center justify-center shadow-xs ${
+                      isDark ? 'bg-butter text-butter-foreground font-bold' : 'bg-zinc-950 text-white'
+                    }`}
+                  >
+                    {item.avatar}
+                  </div>
+                  <div>
+                    <div
+                      className={`font-semibold text-sm ${
+                        isDark ? 'text-white' : 'text-foreground'
+                      }`}
+                    >
+                      {item.author}
+                    </div>
+                    <div
+                      className={`text-xs ${
+                        isDark ? 'text-zinc-400' : 'text-muted-foreground'
+                      }`}
+                    >
+                      {item.role},{' '}
+                      <span
+                        className={`font-medium ${
+                          isDark ? 'text-butter' : 'text-foreground/80'
+                        }`}
+                      >
+                        {item.company}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

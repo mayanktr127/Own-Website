@@ -9,6 +9,7 @@ import {
   Faq,
   ContactCta,
 } from '../components/landing/sections';
+import { TeamSection } from '../components/landing/team';
 
 export function HomePage() {
   return (
@@ -21,6 +22,7 @@ export function HomePage() {
       <Process />
       <Work />
       <Testimonials />
+      <TeamSection />
       <Pricing />
       <Faq />
       <ContactCta />

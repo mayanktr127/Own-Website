@@ -28,15 +28,29 @@ export function SiteNav() {
     <header className="fixed top-0 inset-x-0 z-50 px-5 pt-4 sm:px-10 sm:pt-6 pointer-events-none transition-all duration-300">
       <div className="max-w-7xl mx-auto pointer-events-auto">
         <nav
-          className={`rounded-full px-6 py-3.5 flex items-center justify-between transition-all duration-500 ${
+          className={`relative rounded-full px-6 py-3.5 flex items-center justify-between transition-all duration-500 ${
             isScrolled
               ? 'bg-white/90 text-zinc-950 backdrop-blur-2xl border border-black/10 shadow-lg'
               : 'bg-white/50 text-zinc-950 backdrop-blur-md border border-black/5 shadow-xs'
           }`}
           aria-label="Main Navigation"
         >
-          {/* Left Navigation Links (as in reference image) */}
-          <div className="hidden lg:flex items-center gap-7">
+          {/* Left: Brand Logo & Title (Nexora Studio) */}
+          <Link
+            to="/"
+            className="flex items-center gap-2.5 group shrink-0 z-10"
+            aria-label="Nexora Home"
+          >
+            <div className="w-6 h-6 rounded-lg bg-zinc-950 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-xs">
+              <Triangle className="w-3 h-3 fill-current" />
+            </div>
+            <span className="font-display font-semibold text-sm sm:text-base tracking-tight text-zinc-950">
+              Nexora Studio
+            </span>
+          </Link>
+
+          {/* Center: Desktop Navigation Links (Centered in the Nav Bar) */}
+          <div className="hidden lg:flex items-center gap-7 xl:gap-8 absolute left-1/2 -translate-x-1/2">
             <NavLink
               to="/services"
               className={({ isActive }) =>
@@ -79,25 +93,11 @@ export function SiteNav() {
             </NavLink>
           </div>
 
-          {/* Center: Minimalist Logo Emblem (▲ Nexora Studio) */}
-          <Link
-            to="/"
-            className="flex items-center gap-2 group"
-            aria-label="Nexora Home"
-          >
-            <div className="w-5 h-5 rounded-md bg-zinc-950 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-xs">
-              <Triangle className="w-2.5 h-2.5 fill-current" />
-            </div>
-            <span className="font-display font-semibold text-sm sm:text-base tracking-tight text-zinc-950">
-              Nexora Studio
-            </span>
-          </Link>
-
-          {/* Right: Book a Call / Contact Trigger */}
-          <div className="flex items-center gap-4">
+          {/* Right: CTA Button & Mobile Hamburger */}
+          <div className="flex items-center gap-4 z-10">
             <Link
               to="/contact"
-              className="bg-zinc-950 hover:bg-black text-white rounded-full px-5 py-2 text-xs font-medium inline-flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all duration-200 shadow-sm cursor-pointer"
+              className="bg-zinc-950 hover:bg-black text-white rounded-full px-4 sm:px-5 py-2 text-xs font-medium inline-flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all duration-200 shadow-sm cursor-pointer shrink-0"
             >
               <span>Start Project</span>
               <ArrowUpRight className="w-3.5 h-3.5" />

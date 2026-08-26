@@ -177,45 +177,80 @@ export function Process() {
           </p>
         </div>
 
-        {/* 4 Process Cards */}
+        {/* 4 Process Cards with Alternating Black & Light Design */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {PROCESS_STEPS.map((item, index) => (
-            <div
-              key={item.step}
-              data-reveal
-              data-reveal-delay={`${index * 80}`}
-              className="rounded-[32px] border border-border bg-card p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl group"
-            >
-              <div>
-                {/* Step number & label */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-display text-3xl font-semibold text-foreground/30 group-hover:text-butter transition-colors">
-                    {item.step}
-                  </span>
-                  <span className="text-xs font-mono font-semibold text-muted-foreground">
-                    {item.percent}
-                  </span>
-                </div>
-
-                {/* Progress bar */}
-                <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mb-6">
+          {PROCESS_STEPS.map((item, index) => {
+            const isDark = index % 2 === 1; // Alternating black cards (02, 04)
+            return (
+              <div
+                key={item.step}
+                data-reveal
+                data-reveal-delay={`${index * 80}`}
+                className={`rounded-[32px] p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 border group relative overflow-hidden ${
+                  isDark
+                    ? 'bg-zinc-950 text-white border-white/10 shadow-xl hover:border-butter/30 hover:shadow-2xl'
+                    : 'bg-card text-foreground border-border shadow-soft hover:shadow-xl'
+                }`}
+              >
+                {/* Subtle Glow for Black Cards */}
+                {isDark && (
                   <div
-                    className={`h-full bg-butter rounded-full transition-all duration-500 ${item.progress}`}
+                    className="absolute -top-12 -right-12 w-32 h-32 bg-butter/10 rounded-full blur-2xl pointer-events-none"
+                    aria-hidden="true"
                   />
+                )}
+
+                <div>
+                  {/* Step number & label */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className={`font-display text-3xl font-semibold transition-colors ${
+                        isDark ? 'text-butter/80 group-hover:text-butter' : 'text-foreground/30 group-hover:text-butter'
+                      }`}
+                    >
+                      {item.step}
+                    </span>
+                    <span
+                      className={`text-xs font-mono font-semibold ${
+                        isDark ? 'text-zinc-400' : 'text-muted-foreground'
+                      }`}
+                    >
+                      {item.percent}
+                    </span>
+                  </div>
+
+                  {/* Progress bar */}
+                  <div
+                    className={`w-full h-1.5 rounded-full overflow-hidden mb-6 ${
+                      isDark ? 'bg-white/10' : 'bg-secondary'
+                    }`}
+                  >
+                    <div
+                      className={`h-full bg-butter rounded-full transition-all duration-500 ${item.progress}`}
+                    />
+                  </div>
+
+                  {/* Step Title */}
+                  <h3
+                    className={`font-display text-xl font-medium tracking-tight mb-3 ${
+                      isDark ? 'text-white' : 'text-foreground'
+                    }`}
+                  >
+                    {item.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    className={`text-sm leading-relaxed ${
+                      isDark ? 'text-zinc-300' : 'text-muted-foreground'
+                    }`}
+                  >
+                    {item.description}
+                  </p>
                 </div>
-
-                {/* Step Title */}
-                <h3 className="font-display text-xl font-medium tracking-tight text-foreground mb-3">
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

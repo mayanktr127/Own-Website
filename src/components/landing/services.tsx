@@ -35,7 +35,7 @@ const SERVICES_DATA = [
       'Hybrid Vector RAG',
       'CRM & ERP Automation',
     ],
-    highlight: true, // Butter glow feature card
+    highlight: true, // Black Card
   },
   {
     icon: Layers,
@@ -61,7 +61,7 @@ const SERVICES_DATA = [
       'Unified design tokens',
       'Full App Store launch',
     ],
-    highlight: false,
+    highlight: true, // Black Card (Alternating)
   },
   {
     icon: Search,
@@ -87,7 +87,7 @@ const SERVICES_DATA = [
       'Lifecycle automation',
       'Custom attribution models',
     ],
-    highlight: false,
+    highlight: true, // Black Card (Alternating)
   },
 ];
 

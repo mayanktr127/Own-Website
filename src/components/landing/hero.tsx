@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { ArrowRight, ArrowUpRight, Play, Pause, RotateCcw, Sun, Zap, Sunset, Moon, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Play, Pause, RotateCcw, Sun, Zap, Sunset, Moon } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { RoadServicesSignboard, MILESTONE_SERVICES } from './road-services-signboard';
+import { MILESTONE_SERVICES } from './road-services-signboard';
 import { SystemTourModal } from './system-tour-modal';
 import { useSmoothScroll } from '../../lib/lenis-scroll';
+import { toast } from 'sonner';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -222,6 +223,19 @@ export function Hero() {
     };
   }, [isPlayingAuto, videoDuration]);
 
+  // Lead capture email state
+  const [emailInput, setEmailInput] = useState('');
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!emailInput || !emailInput.includes('@')) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
+    toast.success(`Thanks! We've received ${emailInput}. Our team will be in touch shortly.`);
+    setEmailInput('');
+  };
+
   // Determine current active milestone and phase name
   const currentMilestone = MILESTONE_SERVICES[activeMilestoneIdx] || MILESTONE_SERVICES[0];
   const currentPhase = `Milestone ${currentMilestone.mile} · ${currentMilestone.timeRange}`;
@@ -241,7 +255,11 @@ export function Hero() {
         {/* Pinned 100vh Viewport Container */}
         <div
           ref={pinContainerRef}
-          className="w-full h-[100dvh] overflow-hidden flex flex-col justify-between pt-24 pb-6 sm:pt-28 sm:pb-8 relative will-change-transform transform-gpu"
+          className="w-full h-[100dvh] overflow-hidden relative will-change-transform transform-gpu flex flex-col justify-between"
+          style={{
+            paddingTop: 'clamp(6rem, 14vh, 7.5rem)',
+            paddingBottom: 'clamp(0.5rem, 1.8vh, 1.25rem)',
+          }}
         >
           {/* Background Video Player with Frame-by-Frame Scrubbing */}
           <div className="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none bg-zinc-950">
@@ -249,7 +267,7 @@ export function Hero() {
             <img
               src="/assets/hero-scrub-poster.jpg"
               alt="Nexora Architecture Visual"
-              className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${
+              className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
                 videoLoaded && !videoError ? 'opacity-0' : 'opacity-100'
               }`}
             />
@@ -265,7 +283,7 @@ export function Hero() {
                 preload="auto"
                 onLoadedMetadata={handleLoadedMetadata}
                 onError={handleVideoError}
-                className={`absolute inset-0 w-full h-full object-cover object-center brightness-[0.96] contrast-[1.03] transform-gpu will-change-transform transition-opacity duration-500 ${
+                className={`absolute inset-0 w-full h-full object-cover object-top brightness-[0.97] contrast-[1.02] transform-gpu will-change-transform transition-opacity duration-500 ${
                   videoLoaded ? 'opacity-100' : 'opacity-0'
                 }`}
                 style={{
@@ -275,142 +293,152 @@ export function Hero() {
               />
             )}
 
-            {/* Subtle Gradient Overlays for High-Contrast Readable Typography */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/35 pointer-events-none" />
-            <div className="absolute inset-0 bg-radial-[circle_at_center] from-transparent via-transparent to-black/30 pointer-events-none" />
+            {/* High-Performance Luminous Sky Protection Scrim for 100% Black Typography Contrast */}
+            <div className="absolute inset-x-0 top-0 h-[62%] bg-gradient-to-b from-white/90 via-white/45 to-transparent pointer-events-none z-[1]" />
+            <div className="absolute inset-x-0 bottom-0 h-[28%] bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none z-[1]" />
           </div>
 
-          {/* Top Sky Area: Exact Reference Typography & Logo Ribbon */}
-          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full flex flex-col items-start text-left pt-2 sm:pt-4">
-            {/* Pill Eyebrow with Live Scroll-Time Phase Indicator */}
-            <button
-              type="button"
-              onClick={() => handleSelectMilestone((activeMilestoneIdx + 1) % MILESTONE_SERVICES.length)}
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 hover:bg-white backdrop-blur-md border border-black/10 text-zinc-950 text-xs font-medium mb-3 sm:mb-4 shadow-sm transition-all duration-300 cursor-pointer group"
-              title="Click to advance to next milestone"
-            >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-semibold text-emerald-800 uppercase tracking-wider text-[11px] font-mono">
-                {currentPhase}
-              </span>
-              <span className="text-zinc-300">·</span>
-              <span className="text-zinc-700 group-hover:text-zinc-950 transition-colors">Scroll to scrub video</span>
-              <ArrowRight className="w-3 h-3 text-zinc-600 group-hover:translate-x-0.5 transition-transform" />
-            </button>
-
-            {/* Main Headline (Sans Grotesque style from reference image) */}
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-[4.2rem] font-medium leading-[1.06] tracking-tight text-zinc-950 mb-4 sm:mb-6 drop-shadow-xs max-w-4xl">
-              One unified system to build, <br className="hidden sm:inline" />
-              test, ship, and scale software
-            </h1>
-
-            {/* Floating Logo Strip */}
-            <div className="flex flex-wrap items-center gap-6 sm:gap-12 opacity-90 mb-2">
-              {TRUST_LOGOS.map((logo) => (
-                <span
-                  key={logo}
-                  className="font-display font-bold text-sm sm:text-base tracking-widest text-zinc-800 uppercase hover:text-zinc-950 transition-colors cursor-default"
-                >
-                  {logo}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Lower Ground Area: Road Milestone Signboard */}
-          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full flex flex-col lg:flex-row items-end justify-between gap-6 my-auto">
-            {/* Left CTA & Blueprint Trigger */}
-            <div className="flex flex-wrap items-center gap-3 bg-white/85 backdrop-blur-md p-2 rounded-full border border-black/10 shadow-md">
-              <a
-                href="#contact"
-                className="bg-zinc-950 hover:bg-black text-white rounded-full px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-wide inline-flex items-center gap-2 transition-all duration-300 shadow-md hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                <span>Start Project</span>
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
-
+          {/* Main 3-Zone Content Container Guaranteed to Fit 100dvh */}
+          <div className="relative z-10 max-w-7xl mx-auto px-3.5 sm:px-8 w-full h-full flex flex-col justify-between">
+            {/* Zone 1: Top Sky Area (Eyebrow + Responsive Headline + Logo Capsule) */}
+            <div className="w-full flex flex-col items-start text-left shrink-0">
+              {/* Pill Eyebrow with Live Scroll-Time Phase Indicator */}
               <button
                 type="button"
-                onClick={() => setIsTourOpen(true)}
-                className="bg-white hover:bg-zinc-100 text-zinc-950 rounded-full px-5 py-2.5 text-xs sm:text-sm font-medium inline-flex items-center gap-2 transition-all duration-200 cursor-pointer shadow-xs"
+                onClick={() => handleSelectMilestone((activeMilestoneIdx + 1) % MILESTONE_SERVICES.length)}
+                className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/90 hover:bg-white backdrop-blur-md border border-black/10 text-zinc-950 text-[10px] sm:text-[11.5px] font-semibold mb-1.5 shadow-xs transition-all duration-300 cursor-pointer group"
+                title="Click to advance to next phase"
               >
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                <span>System Blueprint</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="font-bold text-emerald-800 uppercase tracking-wider font-mono">
+                  {currentPhase}
+                </span>
+                <span className="text-zinc-300">·</span>
+                <span className="text-zinc-700 group-hover:text-zinc-950 transition-colors">Scroll to scrub</span>
+                <ArrowRight className="w-3.5 h-3.5 text-zinc-600 group-hover:translate-x-0.5 transition-transform" />
               </button>
+
+              {/* Main Headline (Scaled bigger and bolder for perfect visibility) */}
+              <h1
+                className="font-display font-medium tracking-tight text-zinc-950 drop-shadow-xs max-w-3xl mb-1.5"
+                style={{
+                  fontSize: 'clamp(1.75rem, 2.7vw + 1.2vh, 3.5rem)',
+                  lineHeight: 1.08,
+                  letterSpacing: '-0.035em',
+                }}
+              >
+                One unified system to build, <br className="hidden sm:inline" />
+                test, ship, and scale software
+              </h1>
+
+              {/* Floating Logo Ribbon in Crisp Protective Glass Capsule */}
+              <div className="inline-flex flex-wrap items-center gap-3.5 sm:gap-6 px-4 py-1 rounded-full bg-white/75 backdrop-blur-md border border-black/10 shadow-xs">
+                {TRUST_LOGOS.map((logo) => (
+                  <span
+                    key={logo}
+                    className="font-display font-bold text-[9.5px] sm:text-[11px] lg:text-[12px] tracking-widest text-zinc-800 uppercase hover:text-zinc-950 transition-colors cursor-default"
+                  >
+                    {logo}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            {/* Right: Synchronized Road Services Signboard */}
-            <div data-reveal className="w-full max-w-[480px]">
-              <RoadServicesSignboard
-                controlledIdx={activeMilestoneIdx}
-                videoTime={videoTime}
-                onSelectMilestone={handleSelectMilestone}
-              />
-            </div>
-          </div>
+            {/* Zone 2: Lower Ground Area (Clean, Unobstructed Landscape) */}
+            <div className="w-full flex items-end justify-between my-auto shrink-0">
+              {/* Left: Email Lead Capture Pill (Matches Image 2 & Website Theme) */}
+              <form
+                onSubmit={handleEmailSubmit}
+                className="rounded-full bg-white/90 hover:bg-white/95 focus-within:bg-white backdrop-blur-xl border border-black/10 shadow-xl pl-4 pr-1.5 py-1.5 flex items-center gap-2 max-w-[320px] sm:max-w-[360px] w-full transition-all duration-300 focus-within:ring-2 focus-within:ring-zinc-950/20"
+              >
+                <div className="flex flex-col flex-1 text-left min-w-0">
+                  <label
+                    htmlFor="hero-email"
+                    className="text-[8px] sm:text-[8.5px] font-semibold text-zinc-400 uppercase tracking-wider leading-none mb-0.5"
+                  >
+                    Your email address
+                  </label>
+                  <input
+                    id="hero-email"
+                    type="email"
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    placeholder="samantha@email.com"
+                    className="bg-transparent border-none outline-none text-xs sm:text-[12.5px] font-medium text-zinc-950 placeholder:text-zinc-400 p-0 leading-tight w-full"
+                    required
+                  />
+                </div>
 
-          {/* Bottom Grounded Video Scrubber HUD */}
-          <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full mt-2">
-            <div className="rounded-[24px] bg-white/90 backdrop-blur-xl border border-black/10 px-5 py-3 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-900 text-xs">
-              {/* Playhead Time & Autoplay Controls */}
-              <div className="flex items-center gap-3">
                 <button
-                  type="button"
-                  onClick={() => setIsPlayingAuto(!isPlayingAuto)}
-                  className="w-8 h-8 rounded-xl bg-zinc-950 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
-                  aria-label={isPlayingAuto ? 'Pause preview' : 'Play preview continuous'}
+                  type="submit"
+                  className="bg-zinc-950 hover:bg-black text-white px-3.5 py-1.5 sm:px-4.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide inline-flex items-center gap-1 transition-all duration-300 shadow-md hover:scale-102 active:scale-95 cursor-pointer shrink-0"
                 >
-                  {isPlayingAuto ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
+                  <span>Get Started</span>
+                  <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
+              </form>
+            </div>
 
-                <div className="text-left font-mono">
-                  <div className="font-bold text-zinc-950 text-xs flex items-center gap-1.5">
-                    <span>⏱️ {videoTime.toFixed(1)}s / {(videoDuration || 10).toFixed(1)}s</span>
-                    <span className="text-[10px] text-zinc-500 font-normal">
-                      ({Math.round((videoTime / (videoDuration || 10)) * 100)}% Smooth Scroll Scrubbed)
-                    </span>
-                  </div>
-                  <div className="text-[10px] text-zinc-500">
-                    {isPlayingAuto ? 'Continuous Playback Mode' : 'Scroll down to scrub daylight -> night'}
+            {/* Zone 3: Bottom Grounded Video Scrubber HUD Bar */}
+            <div className="w-full shrink-0 pb-1.5 sm:pb-2">
+              <div className="rounded-[18px] sm:rounded-[24px] bg-white/95 backdrop-blur-xl border border-black/10 px-3.5 py-2 sm:px-5 sm:py-2.5 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-2.5 text-zinc-900 text-xs">
+                {/* Left: Playhead Time & Autoplay Controls */}
+                <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setIsPlayingAuto(!isPlayingAuto)}
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-zinc-950 text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 cursor-pointer shadow-xs"
+                    aria-label={isPlayingAuto ? 'Pause preview' : 'Play preview continuous'}
+                  >
+                    {isPlayingAuto ? <Pause className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current ml-0.5" />}
+                  </button>
+
+                  <div className="text-left font-mono">
+                    <div className="font-bold text-zinc-950 text-[10.5px] sm:text-[11.5px] flex items-center gap-1.5">
+                      <span>⏱️ {videoTime.toFixed(1)}s / {(videoDuration || 10).toFixed(1)}s</span>
+                      <span className="text-[9.5px] sm:text-[10px] text-zinc-500 font-normal">
+                        ({Math.round((videoTime / (videoDuration || 10)) * 100)}% Scrubbed)
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Scroll Milestone Quick Jump Buttons */}
-              <div className="flex items-center gap-1.5 flex-wrap">
-                {SCROLL_PHASES.map((phase) => {
-                  const Icon = phase.icon;
-                  const isActive =
-                    (phase.time === 0 && videoTime < 3.0) ||
-                    (phase.time === 3 && videoTime >= 3.0 && videoTime < 6.0) ||
-                    (phase.time === 6 && videoTime >= 6.0 && videoTime < 9.0) ||
-                    (phase.time >= 9 && videoTime >= 9.0);
+                {/* Right: Scroll Milestone Quick Jump Buttons */}
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap shrink-0">
+                  {SCROLL_PHASES.map((phase) => {
+                    const Icon = phase.icon;
+                    const isActive =
+                      (phase.time === 0 && videoTime < 3.0) ||
+                      (phase.time === 3 && videoTime >= 3.0 && videoTime < 6.0) ||
+                      (phase.time === 6 && videoTime >= 6.0 && videoTime < 9.0) ||
+                      (phase.time >= 9 && videoTime >= 9.0);
 
-                  return (
-                    <button
-                      key={phase.label}
-                      type="button"
-                      onClick={() => jumpToTime(phase.time)}
-                      className={`px-3 py-1.5 rounded-xl text-[11px] font-medium inline-flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
-                        isActive
-                          ? 'bg-zinc-950 text-white shadow-xs scale-102 font-semibold'
-                          : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700'
-                      }`}
-                    >
-                      <Icon className="w-3 h-3" />
-                      <span>{phase.label}</span>
-                    </button>
-                  );
-                })}
+                    return (
+                      <button
+                        key={phase.label}
+                        type="button"
+                        onClick={() => jumpToTime(phase.time)}
+                        className={`px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl text-[9.5px] sm:text-[10.5px] font-medium inline-flex items-center gap-1.5 transition-all duration-300 cursor-pointer ${
+                          isActive
+                            ? 'bg-zinc-950 text-white shadow-xs scale-102 font-semibold'
+                            : 'bg-zinc-100 hover:bg-zinc-200 text-zinc-700'
+                        }`}
+                      >
+                        <Icon className="w-3 h-3" />
+                        <span>{phase.label}</span>
+                      </button>
+                    );
+                  })}
 
-                <button
-                  type="button"
-                  onClick={() => jumpToTime(0)}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors cursor-pointer"
-                  title="Reset to 0s"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => jumpToTime(0)}
+                    className="p-1 sm:p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 hover:bg-zinc-100 transition-colors cursor-pointer ml-0.5"
+                    title="Reset to 0s"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
