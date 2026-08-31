@@ -126,16 +126,30 @@ export function WhyUsPage() {
 
         {/* 4 Pillars Deep Dive */}
         <div className="grid md:grid-cols-2 gap-6 mb-24">
-          {PILLARS.map((pillar) => {
+          {PILLARS.map((pillar, pIdx) => {
             const Icon = pillar.icon;
             return (
               <div
                 key={pillar.title}
-                className="rounded-3xl border border-border bg-card p-8 text-left flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft"
+                className="rounded-3xl border border-border bg-card p-8 text-left flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft group"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center mb-6 shadow-xs">
-                    <Icon className="w-6 h-6" />
+                  <div
+                    style={{ animationDelay: `${pIdx * 0.3}s` }}
+                    className="w-12 h-12 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center mb-6 shadow-xs animate-icon-float animate-icon-glow group-hover:scale-110 transition-transform duration-300"
+                  >
+                    <Icon
+                      style={{ animationDelay: `${pIdx * 0.2}s` }}
+                      className={`w-6 h-6 transition-transform duration-300 group-hover:scale-120 ${
+                        pIdx === 0
+                          ? 'animate-icon-wiggle'
+                          : pIdx === 1
+                          ? 'animate-icon-bob'
+                          : pIdx === 2
+                          ? 'animate-icon-sparkle'
+                          : 'animate-icon-pulse'
+                      }`}
+                    />
                   </div>
                   <h2 className="font-display text-2xl font-medium tracking-tight text-foreground mb-3">
                     {pillar.title}

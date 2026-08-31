@@ -33,27 +33,27 @@ export function SprintBookingSection() {
 
             {/* Value Highlights */}
             <div className="space-y-4 mb-10 w-full max-w-md">
-              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10">
-                <div className="w-8 h-8 rounded-xl bg-butter/20 text-butter flex items-center justify-center shrink-0">
-                  <Zap className="w-4 h-4" />
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10 group hover:border-butter/30 transition-colors">
+                <div className="w-8 h-8 rounded-xl bg-butter/20 text-butter flex items-center justify-center shrink-0 animate-icon-float animate-icon-glow">
+                  <Zap className="w-4 h-4 animate-icon-wiggle group-hover:scale-125 transition-transform" />
                 </div>
                 <div className="text-xs text-zinc-300">
                   <span className="font-semibold text-white">Weekly Working Demos</span> — Test staging builds on your own phone every Friday.
                 </div>
               </div>
 
-              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10">
-                <div className="w-8 h-8 rounded-xl bg-butter/20 text-butter flex items-center justify-center shrink-0">
-                  <MessageSquare className="w-4 h-4" />
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10 group hover:border-butter/30 transition-colors">
+                <div style={{ animationDelay: '0.3s' }} className="w-8 h-8 rounded-xl bg-butter/20 text-butter flex items-center justify-center shrink-0 animate-icon-float animate-icon-glow">
+                  <MessageSquare className="w-4 h-4 animate-icon-sway group-hover:scale-125 transition-transform" />
                 </div>
                 <div className="text-xs text-zinc-300">
                   <span className="font-semibold text-white">Direct Slack Channel</span> — Talk directly to lead engineers and designers, no account managers.
                 </div>
               </div>
 
-              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10">
-                <div className="w-8 h-8 rounded-xl bg-butter/20 text-butter flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
+              <div className="flex items-center gap-3.5 p-3 rounded-2xl bg-white/5 border border-white/10 group hover:border-butter/30 transition-colors">
+                <div style={{ animationDelay: '0.6s' }} className="w-8 h-8 rounded-xl bg-butter/20 text-butter flex items-center justify-center shrink-0 animate-icon-float animate-icon-glow">
+                  <ShieldCheck className="w-4 h-4 animate-icon-pulse group-hover:scale-125 transition-transform" />
                 </div>
                 <div className="text-xs text-zinc-300">
                   <span className="font-semibold text-white">Full IP Ownership</span> — Clean typed codebases and Figma design files handed over 100% to you.
@@ -64,7 +64,7 @@ export function SprintBookingSection() {
             {/* Social Proof Star Rating Badge (WoodNest Inspired) */}
             <div className="flex items-center gap-3.5 pt-4 border-t border-white/10">
               <div className="flex items-center gap-1 text-amber-400">
-                <Star className="w-5 h-5 fill-current" />
+                <Star className="w-5 h-5 fill-current animate-icon-sparkle" />
                 <span className="text-lg font-bold text-white">4.9</span>
               </div>
               <div className="text-xs text-zinc-400">

@@ -109,8 +109,22 @@ export function WhyUs() {
                   data-reveal-delay={`${idx * 70}`}
                   className="bg-zinc-900/90 rounded-[28px] p-6 sm:p-7 border border-white/10 flex gap-4 items-start transition-all duration-300 hover:-translate-y-1 hover:border-white/20 shadow-lg group"
                 >
-                  <div className="w-12 h-12 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform">
-                    <Icon className="w-6 h-6" />
+                  <div
+                    style={{ animationDelay: `${idx * 0.35}s` }}
+                    className="w-12 h-12 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center shrink-0 shadow-xs animate-icon-float animate-icon-glow group-hover:scale-110 transition-transform duration-300"
+                  >
+                    <Icon
+                      style={{ animationDelay: `${idx * 0.25}s` }}
+                      className={`w-6 h-6 transition-transform duration-300 group-hover:scale-120 ${
+                        idx === 0
+                          ? 'animate-icon-wiggle'
+                          : idx === 1
+                          ? 'animate-icon-bob'
+                          : idx === 2
+                          ? 'animate-icon-sparkle'
+                          : 'animate-icon-pulse'
+                      }`}
+                    />
                   </div>
                   <div>
                     <h3 className="font-display text-lg sm:text-xl font-medium tracking-tight text-white mb-1.5">

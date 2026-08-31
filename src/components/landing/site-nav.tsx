@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, Triangle } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { BrandLogo } from '../common/brand-logo';
 
 const NAV_LINKS = [
   { label: 'Solutions', href: '/services' },
@@ -35,18 +36,13 @@ export function SiteNav() {
           }`}
           aria-label="Main Navigation"
         >
-          {/* Left: Brand Logo & Title (Nexora Studio) */}
+          {/* Left: Brand Logo & Title (My Planet Services) */}
           <Link
             to="/"
-            className="flex items-center gap-2.5 group shrink-0 z-10"
-            aria-label="Nexora Home"
+            className="flex items-center shrink-0 z-10"
+            aria-label="My Planet Services Home"
           >
-            <div className="w-6 h-6 rounded-lg bg-zinc-950 text-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-xs">
-              <Triangle className="w-3 h-3 fill-current" />
-            </div>
-            <span className="font-display font-semibold text-sm sm:text-base tracking-tight text-zinc-950">
-              Nexora Studio
-            </span>
+            <BrandLogo variant="light" />
           </Link>
 
           {/* Center: Desktop Navigation Links (Centered in the Nav Bar) */}

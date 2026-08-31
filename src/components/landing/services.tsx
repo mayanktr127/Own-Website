@@ -175,16 +175,32 @@ export function Services() {
                 )}
 
                 <div>
-                  {/* Top Bar: Icon + Category Badge */}
+                  {/* Top Bar: Animated Icon + Category Badge */}
                   <div className="flex items-center justify-between mb-6">
                     <div
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs ${
+                      style={{ animationDelay: `${index * 0.3}s` }}
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-xs animate-icon-float ${
                         service.highlight
-                          ? 'bg-butter text-butter-foreground'
-                          : 'bg-secondary text-foreground group-hover:bg-butter group-hover:text-butter-foreground'
+                          ? 'bg-butter text-butter-foreground animate-icon-glow'
+                          : 'bg-secondary text-foreground group-hover:bg-butter group-hover:text-butter-foreground animate-icon-glow-dark'
                       }`}
                     >
-                      <Icon className="w-6 h-6" />
+                      <Icon
+                        style={{ animationDelay: `${index * 0.2}s` }}
+                        className={`w-6 h-6 transition-transform duration-300 group-hover:scale-120 ${
+                          index === 0
+                            ? 'animate-icon-spin'
+                            : index === 1
+                            ? 'animate-icon-wiggle'
+                            : index === 2
+                            ? 'animate-icon-bob'
+                            : index === 3
+                            ? 'animate-icon-wiggle'
+                            : index === 4
+                            ? 'animate-icon-pulse'
+                            : 'animate-icon-sway'
+                        }`}
+                      />
                     </div>
 
                     <span

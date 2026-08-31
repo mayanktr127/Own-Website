@@ -133,7 +133,7 @@ export function ProcessPage() {
 
         {/* 4 Phases Timeline */}
         <div className="flex flex-col gap-8 mb-24">
-          {PHASES.map((phase) => {
+          {PHASES.map((phase, pIdx) => {
             const Icon = phase.icon;
             return (
               <div
@@ -149,8 +149,22 @@ export function ProcessPage() {
                         <span className="font-display text-3xl sm:text-4xl font-semibold text-foreground/40">
                           {phase.step}
                         </span>
-                        <div className="w-10 h-10 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center shadow-xs">
-                          <Icon className="w-5 h-5" />
+                        <div
+                          style={{ animationDelay: `${pIdx * 0.3}s` }}
+                          className="w-10 h-10 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center shadow-xs animate-icon-float animate-icon-glow"
+                        >
+                          <Icon
+                            style={{ animationDelay: `${pIdx * 0.2}s` }}
+                            className={`w-5 h-5 transition-transform duration-300 ${
+                              pIdx === 0
+                                ? 'animate-icon-spin'
+                                : pIdx === 1
+                                ? 'animate-icon-bob'
+                                : pIdx === 2
+                                ? 'animate-icon-pulse'
+                                : 'animate-icon-wiggle'
+                            }`}
+                          />
                         </div>
                         <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-foreground">
                           {phase.title}

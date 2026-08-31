@@ -246,8 +246,8 @@ export function ContactPage() {
                   href="mailto:hello@nexora.studio"
                   className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors">
-                    <Mail className="w-4 h-4" />
+                  <div className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors animate-icon-float animate-icon-glow">
+                    <Mail className="w-4 h-4 animate-icon-wiggle group-hover:scale-120 transition-transform" />
                   </div>
                   <span>hello@nexora.studio</span>
                 </a>
@@ -255,21 +255,21 @@ export function ContactPage() {
                   href="tel:+14155550148"
                   className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors group"
                 >
-                  <div className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors">
-                    <Phone className="w-4 h-4" />
+                  <div style={{ animationDelay: '0.3s' }} className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors animate-icon-float animate-icon-glow">
+                    <Phone className="w-4 h-4 animate-icon-sway group-hover:scale-120 transition-transform" />
                   </div>
                   <span>+1 (415) 555-0148</span>
                 </a>
-                <div className="flex items-center gap-3 text-muted-foreground">
-                  <div className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-foreground">
-                    <MapPin className="w-4 h-4" />
+                <div className="flex items-center gap-3 text-muted-foreground group">
+                  <div style={{ animationDelay: '0.6s' }} className="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-foreground animate-icon-float">
+                    <MapPin className="w-4 h-4 animate-icon-bob group-hover:scale-120 transition-transform" />
                   </div>
                   <span>Remote-first · Austin, TX · Bengaluru, India</span>
                 </div>
               </div>
 
               <div className="mt-6 pt-5 border-t border-border/60 flex items-center gap-2 text-xs text-muted-foreground">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 animate-icon-pulse" />
                 <span>100% Mutual NDA guaranteed before technical review.</span>
               </div>
             </div>

@@ -24,111 +24,65 @@ interface TeamMember {
 
 const TEAM_MEMBERS: TeamMember[] = [
   {
-    name: 'Zack Hill',
-    role: 'Partner & Chief Architect',
+    name: 'Vivek Kumar',
+    role: 'Partner & Technology Lead',
     department: 'Leadership',
-    email: 'zack@nexora.studio',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-amber-400/30 to-butter/60',
-    bio: 'Former principal infra architect at Stripe. Specializes in sub-second distributed databases and serverless edge orchestration.',
-    specialties: ['Next.js 15', 'Distributed Systems', 'Rust'],
-    experience: '12+ yrs',
-  },
-  {
-    name: 'Sarah Devine',
-    role: 'Director of Product & UX',
-    department: 'Design',
-    email: 'sarah@nexora.studio',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-zinc-800 to-zinc-950',
-    bio: 'Ex-Linear design lead. Built design token systems for 40+ SaaS platforms with 60fps micro-interactions.',
-    specialties: ['Figma Systems', 'UI Physics', 'Design Tokens'],
-    experience: '9+ yrs',
-  },
-  {
-    name: 'Arlton Lowry',
-    role: 'Partner & Chief Creative Officer',
-    department: 'Leadership',
-    email: 'arlton@nexora.studio',
+    email: 'vivek@myplanet.services',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-butter/40 to-amber-500/30',
-    bio: 'Award-winning creative director overseeing brand identity, high-conversion layout strategy, and visual direction.',
-    specialties: ['Brand Identity', 'Editorial Direction', 'Design Systems'],
-    experience: '14+ yrs',
+    blobColor: 'from-amber-400/35 to-butter/70',
+    bio: 'Architecting scalable full-stack web & mobile apps, autonomous AI copilot swarms, and data-backed performance marketing engines.',
+    specialties: [
+      'Website Development',
+      'Mobile App Development',
+      'AI Agents & Copilots',
+      'SEO, AEO & GEO',
+      'Performance Marketing',
+    ],
+    experience: '4+ yrs',
   },
   {
-    name: 'Will Carter',
-    role: 'Head of AI & Autonomous Swarms',
+    name: 'Mayank',
+    role: 'Co-Founder & AI Architect',
     department: 'AI & Systems',
-    email: 'will@nexora.studio',
+    email: 'mayank@myplanet.services',
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-emerald-600/30 to-teal-500/20',
-    bio: 'AI researcher and systems engineer. Specializes in hybrid vector RAG pipelines, multi-agent reasoning, and zero-hallucination copilots.',
-    specialties: ['Claude 3.5', 'Vector RAG', 'Multi-Agent Swarms'],
-    experience: '8+ yrs',
+    blobColor: 'from-zinc-800 to-zinc-950',
+    bio: 'Specializes in AI reasoning engines, modern cloud SaaS platforms, high-converting web experiences, and multi-channel acquisition funnels.',
+    specialties: [
+      'AI Agents & Copilots',
+      'Website Development',
+      'Performance Marketing',
+      'SaaS Engineering',
+    ],
+    experience: '4+ yrs',
   },
   {
-    name: 'Brent Fulford',
-    role: 'Lead Growth & AEO Engineer',
+    name: 'Vishnu Kumar',
+    role: 'Partner & Growth Architect',
     department: 'Growth',
-    email: 'brent@nexora.studio',
+    email: 'vishnu@myplanet.services',
     image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-zinc-700 to-zinc-900',
-    bio: 'Pioneered Generative Engine Optimization (GEO) and JSON-LD knowledge entity graphs dominating Google & Perplexity citations.',
-    specialties: ['AEO & GEO', 'Knowledge Graphs', 'Programmatic SEO'],
-    experience: '10+ yrs',
-  },
-  {
-    name: 'Correne Spero',
-    role: 'Director of Delivery & Client Ops',
-    department: 'Leadership',
-    email: 'spero@nexora.studio',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-amber-300/30 to-yellow-500/20',
-    bio: 'Runs our weekly sprint orchestration, staging release checkpoints, and executive founder stakeholder alignment.',
-    specialties: ['Sprint Planning', 'Linear Sync', 'Zero-Surprise Delivery'],
-    experience: '11+ yrs',
-  },
-  {
-    name: 'Calvin Bramlett',
-    role: 'Senior Motion & Frontend Architect',
-    department: 'Design',
-    email: 'calvin@nexora.studio',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-zinc-800 to-black',
-    bio: 'GSAP and WebGL specialist creating silky 60fps frame-scrubbed interfaces, micro-animations, and fluid physics.',
-    specialties: ['GSAP & Lenis', 'WebGL / Canvas', 'Tailwind v4'],
-    experience: '7+ yrs',
-  },
-  {
-    name: 'Elena Rostova',
-    role: 'Lead Cloud & Security Architect',
-    department: 'AI & Systems',
-    email: 'elena@nexora.studio',
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop',
-    blobColor: 'from-butter/40 to-zinc-800/40',
-    bio: 'SOC2 Type II compliance veteran. Architecting resilient multi-tenant schemas, AWS GovCloud infra, and automated CI/CD security.',
-    specialties: ['SOC2 & HIPAA', 'AWS Cloud', 'PostgreSQL Scaling'],
-    experience: '9+ yrs',
+    blobColor: 'from-butter/50 to-amber-500/40',
+    bio: 'Delivering responsive web ecosystems, iOS & Android cross-platform solutions, technical search engine dominance, and revenue campaigns.',
+    specialties: [
+      'Website Development',
+      'Mobile App Development',
+      'Performance Marketing',
+      'SEO, AEO & GEO',
+    ],
+    experience: '4+ yrs',
   },
 ];
 
 const EXPERT_BADGES = [
-  { text: '15+ Years Experience', color: 'bg-amber-100/90 text-amber-900 border-amber-200' },
-  { text: '7+ Years In Consulting', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
+  { text: '4+ Years In Production Engineering', color: 'bg-emerald-50 text-emerald-800 border-emerald-200' },
   { text: '30+ Shipped MVPs', color: 'bg-zinc-100 text-zinc-800 border-zinc-200' },
   { text: '100+ Happy Founders', color: 'bg-rose-50 text-rose-800 border-rose-200' },
   { text: 'Zero Junior Handoffs', color: 'bg-butter/60 text-butter-foreground border-butter' },
 ];
 
 export function TeamSection() {
-  const [activeDepartment, setActiveDepartment] = useState<string>('All');
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
-
-  const filteredMembers =
-    activeDepartment === 'All'
-      ? TEAM_MEMBERS
-      : TEAM_MEMBERS.filter((m) => m.department === activeDepartment);
 
   const handleCopyEmail = (email: string) => {
     try {
@@ -183,7 +137,7 @@ export function TeamSection() {
         {/* Section Header (Combining "Our People" & "Meet Our Experts") */}
         <div data-reveal className="max-w-3xl mx-auto mb-14 text-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-butter text-butter-foreground text-[11px] font-semibold uppercase tracking-[0.14em] shadow-xs mb-4">
-            <Sparkles className="w-3 h-3" />
+            <Sparkles className="w-3 h-3 animate-icon-sparkle" />
             <span>Senior Product Squad</span>
           </div>
 
@@ -199,53 +153,35 @@ export function TeamSection() {
           <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
             <Link
               to="/contact"
-              className="bg-zinc-950 hover:bg-black text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide inline-flex items-center gap-2 transition-all duration-300 shadow-md hover:scale-105 active:scale-95"
+              className="bg-zinc-950 hover:bg-black text-white px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide inline-flex items-center gap-2 transition-all duration-300 shadow-md hover:scale-105 active:scale-95 group"
             >
-              <Zap className="w-3.5 h-3.5 fill-current text-butter" />
+              <Zap className="w-3.5 h-3.5 fill-current text-butter animate-icon-wiggle" />
               <span>Start Sprints With Us</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
 
             <Link
               to="/services"
-              className="bg-card hover:bg-secondary text-foreground border border-border px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium inline-flex items-center gap-2 transition-all duration-300 shadow-xs hover:scale-102"
+              className="bg-card hover:bg-secondary text-foreground border border-border px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium inline-flex items-center gap-2 transition-all duration-300 shadow-xs hover:scale-102 group"
             >
-              <Compass className="w-3.5 h-3.5 text-muted-foreground" />
+              <Compass className="w-3.5 h-3.5 text-muted-foreground animate-icon-spin" />
               <span>Explore Disciplines</span>
             </Link>
           </div>
         </div>
 
-        {/* Department Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          {['All', 'Leadership', 'AI & Systems', 'Design', 'Growth'].map((dept) => (
-            <button
-              key={dept}
-              type="button"
-              onClick={() => setActiveDepartment(dept)}
-              className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer ${
-                activeDepartment === dept
-                  ? 'bg-zinc-950 text-white font-bold shadow-sm'
-                  : 'bg-card text-muted-foreground hover:text-foreground hover:bg-secondary border border-border/70'
-              }`}
-            >
-              {dept}
-            </button>
-          ))}
-        </div>
-
-        {/* 8-Member Portrait Grid (Combining Image 1 & Image 2 with Alternating Theme) */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredMembers.map((member, index) => {
-            const isDark = index % 2 === 1; // Alternating black and light cards to match site theme
+        {/* 3-Member Portrait Columns */}
+        <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          {TEAM_MEMBERS.map((member, index) => {
+            const isDark = index % 2 === 1; // Alternating: Center card (1 - Sarah) is Black, Side cards (0 & 2) are Light
             const isCopied = copiedEmail === member.email;
 
             return (
               <div
                 key={member.name}
                 data-reveal
-                data-reveal-delay={`${index * 60}`}
-                className={`rounded-[32px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 border group relative overflow-hidden ${
+                data-reveal-delay={`${index * 80}`}
+                className={`rounded-[32px] p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 border group relative overflow-hidden ${
                   isDark
                     ? 'bg-zinc-950 text-white border-white/10 shadow-xl hover:border-butter/40 hover:shadow-2xl'
                     : 'bg-card text-foreground border-border shadow-soft hover:shadow-xl'
@@ -260,7 +196,7 @@ export function TeamSection() {
                 )}
 
                 <div>
-                  {/* Portrait Area with Organic Silhouette Backdrop (Image 1 Style adapted to Nexora Theme) */}
+                  {/* Portrait Area with Organic Silhouette Backdrop in Full Color */}
                   <div className="relative w-full aspect-square mb-6 flex items-center justify-center">
                     {/* Organic Squircle / Blob Shape Backdrop */}
                     <div
@@ -268,12 +204,12 @@ export function TeamSection() {
                       aria-hidden="true"
                     />
 
-                    {/* Team Member Portrait Image */}
+                    {/* Team Member Portrait Image (Full Natural Color) */}
                     <div className="relative z-10 w-4/5 h-4/5 rounded-2xl overflow-hidden shadow-md group-hover:scale-102 transition-transform duration-300">
                       <img
                         src={member.image}
                         alt={`${member.name} - ${member.role}`}
-                        className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-500"
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
                       />
                     </div>

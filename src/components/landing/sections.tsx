@@ -2,16 +2,23 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
   Check,
+  CheckCircle2,
+  Clock,
   Mail,
   MapPin,
   Minus,
   Phone,
   Plus,
+  ShieldCheck,
   Sparkles,
   Star,
+  Zap,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { BrandLogo } from '../common/brand-logo';
 
 /* -------------------------------------------------------------------------- */
 /*                                    WORK                                    */
@@ -214,7 +221,11 @@ export function Testimonials() {
                   {/* 5 Stars */}
                   <div className="flex items-center gap-1 text-amber-400 mb-6">
                     {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
+                      <Star
+                        key={i}
+                        style={{ animationDelay: `${(idx * 5 + i) * 0.15}s` }}
+                        className="w-4 h-4 fill-current animate-icon-sparkle"
+                      />
                     ))}
                   </div>
 
@@ -233,8 +244,11 @@ export function Testimonials() {
                   }`}
                 >
                   <div
-                    className={`w-11 h-11 rounded-2xl text-xs font-semibold flex items-center justify-center shadow-xs ${
-                      isDark ? 'bg-butter text-butter-foreground font-bold' : 'bg-zinc-950 text-white'
+                    style={{ animationDelay: `${idx * 0.3}s` }}
+                    className={`w-11 h-11 rounded-2xl text-xs font-semibold flex items-center justify-center shadow-xs animate-icon-float ${
+                      isDark
+                        ? 'bg-butter text-butter-foreground font-bold animate-icon-glow'
+                        : 'bg-zinc-950 text-white animate-icon-glow-dark'
                     }`}
                   >
                     {item.avatar}
@@ -597,8 +611,8 @@ export function ContactCta() {
                   href="mailto:hello@nexora.studio"
                   className="flex items-center gap-3.5 text-sm text-zinc-400 hover:text-white transition-colors group"
                 >
-                  <div className="w-11 h-11 rounded-2xl bg-white/5 text-butter flex items-center justify-center shrink-0 border border-white/10 group-hover:border-butter/40 transition-colors">
-                    <Mail className="w-4 h-4" />
+                  <div className="w-11 h-11 rounded-2xl bg-white/5 text-butter flex items-center justify-center shrink-0 border border-white/10 group-hover:border-butter/40 transition-colors animate-icon-float animate-icon-glow">
+                    <Mail className="w-4 h-4 animate-icon-wiggle group-hover:scale-120 transition-transform" />
                   </div>
                   <span className="font-mono">hello@nexora.studio</span>
                 </a>
@@ -606,14 +620,14 @@ export function ContactCta() {
                   href="tel:+14155550148"
                   className="flex items-center gap-3.5 text-sm text-zinc-400 hover:text-white transition-colors group"
                 >
-                  <div className="w-11 h-11 rounded-2xl bg-white/5 text-butter flex items-center justify-center shrink-0 border border-white/10 group-hover:border-butter/40 transition-colors">
-                    <Phone className="w-4 h-4" />
+                  <div style={{ animationDelay: '0.3s' }} className="w-11 h-11 rounded-2xl bg-white/5 text-butter flex items-center justify-center shrink-0 border border-white/10 group-hover:border-butter/40 transition-colors animate-icon-float animate-icon-glow">
+                    <Phone className="w-4 h-4 animate-icon-sway group-hover:scale-120 transition-transform" />
                   </div>
                   <span className="font-mono">+1 (415) 555-0148</span>
                 </a>
-                <div className="flex items-center gap-3.5 text-sm text-zinc-400">
-                  <div className="w-11 h-11 rounded-2xl bg-white/5 text-butter flex items-center justify-center shrink-0 border border-white/10">
-                    <MapPin className="w-4 h-4" />
+                <div className="flex items-center gap-3.5 text-sm text-zinc-400 group">
+                  <div style={{ animationDelay: '0.6s' }} className="w-11 h-11 rounded-2xl bg-white/5 text-butter flex items-center justify-center shrink-0 border border-white/10 animate-icon-float animate-icon-glow">
+                    <MapPin className="w-4 h-4 animate-icon-bob group-hover:scale-120 transition-transform" />
                   </div>
                   <span>San Francisco · Austin · London · Bengaluru</span>
                 </div>
@@ -733,119 +747,228 @@ export function ContactCta() {
 export function SiteFooter() {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="border-t border-border bg-background py-16 text-foreground">
+    <footer className="border-t border-border bg-background pt-16 pb-12 text-foreground relative overflow-hidden">
+      {/* Ambient background glow */}
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-butter/5 rounded-full blur-3xl pointer-events-none -z-10"
+        aria-hidden="true"
+      />
+
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-border text-left">
-          {/* Brand Bio */}
-          <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4 group inline-block">
-              <div className="w-8 h-8 rounded-xl bg-butter flex items-center justify-center transition-transform group-hover:scale-105 shadow-xs">
-                <div className="w-3.5 h-3.5 rounded-[3px] bg-zinc-950" />
+        {/* 1. Top Bento Sprint Scoping Banner */}
+        <div
+          data-reveal
+          className="rounded-[32px] bg-zinc-950 text-white p-8 sm:p-12 mb-16 relative overflow-hidden border border-white/10 shadow-2xl"
+        >
+          {/* Subtle Butter Yellow Glow in Corner */}
+          <div
+            className="absolute -top-24 -right-24 w-80 h-80 bg-butter/15 rounded-full blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 text-left">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-butter text-[11px] font-mono font-semibold uppercase tracking-wider mb-4 shadow-2xs">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Q2 2026 Sprint Slots Available</span>
               </div>
-              <span className="font-display font-semibold text-lg tracking-tight text-foreground">
-                Nexora Studio
-              </span>
-            </Link>
-            <p className="text-sm leading-relaxed text-muted-foreground max-w-sm">
-              An AI-native product studio building next-generation web applications, autonomous copilots, and scalable SaaS infrastructure.
-            </p>
-          </div>
+              <h3 className="font-display text-2xl sm:text-4xl font-medium tracking-tight text-white mb-3">
+                Ready to build something extraordinary?
+              </h3>
+              <p className="text-sm sm:text-base leading-relaxed text-zinc-300">
+                Partner directly with our principal operators to ship custom web platforms, mobile apps, autonomous AI swarms, and scalable SaaS infrastructure in weeks.
+              </p>
+            </div>
 
-          {/* Services Column */}
-          <div>
-            <h4 className="font-display font-medium text-sm text-foreground mb-4">
-              Services
-            </h4>
-            <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-              <li>
-                <Link to="/services" className="hover:text-foreground transition-colors">
-                  Website Development
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-foreground transition-colors">
-                  Mobile App Engineering
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-foreground transition-colors">
-                  AI Agents & RAG
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-foreground transition-colors">
-                  SEO, AEO & GEO
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" className="hover:text-foreground transition-colors">
-                  SaaS Architecture
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company Column */}
-          <div>
-            <h4 className="font-display font-medium text-sm text-foreground mb-4">
-              Company
-            </h4>
-            <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-              <li>
-                <Link to="/why-us" className="hover:text-foreground transition-colors">
-                  Why Nexora
-                </Link>
-              </li>
-              <li>
-                <Link to="/process" className="hover:text-foreground transition-colors">
-                  Sprint Process
-                </Link>
-              </li>
-              <li>
-                <Link to="/work" className="hover:text-foreground transition-colors">
-                  Client Outcomes
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-foreground transition-colors">
-                  Schedule Call
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources Column */}
-          <div>
-            <h4 className="font-display font-medium text-sm text-foreground mb-4">
-              Resources
-            </h4>
-            <ul className="flex flex-col gap-2.5 text-xs text-muted-foreground">
-              <li>
-                <Link to="/pricing" className="hover:text-foreground transition-colors">
-                  Sprint Pricing
-                </Link>
-              </li>
-              <li>
-                <Link to="/faq" className="hover:text-foreground transition-colors">
-                  FAQ & Delivery
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-foreground transition-colors">
-                  Book Architecture Call
-                </Link>
-              </li>
-            </ul>
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link
+                to="/contact"
+                className="bg-butter hover:bg-butter/90 text-butter-foreground font-semibold px-6 py-3.5 rounded-full text-xs sm:text-sm inline-flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+              >
+                <span>Schedule Sprint Scoping</span>
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+              <Link
+                to="/services"
+                className="bg-white/10 hover:bg-white/20 text-white font-medium border border-white/15 px-6 py-3.5 rounded-full text-xs sm:text-sm inline-flex items-center gap-2 hover:scale-102 active:scale-98 transition-all"
+              >
+                <Zap className="w-4 h-4 text-butter animate-icon-wiggle" />
+                <span>Explore Disciplines</span>
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div>
-            © {currentYear} Nexora Studio Inc. All rights reserved.
+        {/* 2. Main Navigation & Information Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14 border-b border-border text-left">
+          {/* Column 1: Brand Hub & Direct Contact (5 cols on lg) */}
+          <div className="lg:col-span-5 space-y-6">
+            <Link
+              to="/"
+              className="inline-flex items-center"
+              aria-label="My Planet Services Home"
+            >
+              <BrandLogo variant="light" />
+            </Link>
+
+            <p className="text-sm leading-relaxed text-muted-foreground max-w-md">
+              My Planet Services is an AI-native engineering and product studio. We partner directly with founders to build high-velocity web platforms, autonomous copilot swarms, and production SaaS architectures with zero junior handoffs.
+            </p>
+
+            {/* Direct Contact Badges */}
+            <div className="flex flex-col gap-2.5 pt-1 text-xs">
+              <a
+                href="mailto:hello@myplanet.services"
+                className="flex items-center gap-2.5 text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <div className="w-7 h-7 rounded-lg bg-secondary flex items-center justify-center text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors">
+                  <Mail className="w-3.5 h-3.5" />
+                </div>
+                <span className="font-mono">hello@myplanet.services</span>
+              </a>
+
+              <a
+                href="tel:+14155550148"
+                className="flex items-center gap-2.5 text-muted-foreground hover:text-foreground transition-colors group"
+              >
+                <div className="w-7 h-7 rounded-lg bg-secondary flex items-center justify-center text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors">
+                  <Phone className="w-3.5 h-3.5" />
+                </div>
+                <span className="font-mono">+1 (415) 555-0148</span>
+              </a>
+
+              <div className="flex items-center gap-2.5 text-muted-foreground">
+                <div className="w-7 h-7 rounded-lg bg-secondary flex items-center justify-center text-foreground">
+                  <MapPin className="w-3.5 h-3.5" />
+                </div>
+                <span>San Francisco · Austin · Bengaluru · London</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-6">
+
+          {/* Column 2: Solutions (3 cols on lg) */}
+          <div className="lg:col-span-3">
+            <h4 className="font-display font-medium text-sm text-foreground mb-4 uppercase tracking-wider text-xs font-mono">
+              Engineered Solutions
+            </h4>
+            <ul className="flex flex-col gap-3 text-xs text-muted-foreground">
+              <li>
+                <Link to="/services" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Website Development</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Mobile App Development</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">AI Agents & Copilots</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">SEO, AEO & GEO Programs</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">SaaS Platform Engineering</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Performance Marketing</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Studio & Navigation (2 cols on lg) */}
+          <div className="lg:col-span-2">
+            <h4 className="font-display font-medium text-sm text-foreground mb-4 uppercase tracking-wider text-xs font-mono">
+              Studio & Process
+            </h4>
+            <ul className="flex flex-col gap-3 text-xs text-muted-foreground">
+              <li>
+                <Link to="/#team" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Meet The Squad</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/process" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">4-Phase Sprint Process</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/why-us" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Why My Planet</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/work" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Client Outcomes</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/pricing" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Sprint Pricing</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/faq" className="hover:text-foreground transition-colors flex items-center gap-1.5 group">
+                  <span className="group-hover:translate-x-1 transition-transform">Knowledge Base & FAQ</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: Reliability & Operational Guarantees (2 cols on lg) */}
+          <div className="lg:col-span-2">
+            <h4 className="font-display font-medium text-sm text-foreground mb-4 uppercase tracking-wider text-xs font-mono">
+              Reliability & SLA
+            </h4>
+            <div className="flex flex-col gap-3 text-xs">
+              <div className="p-3 rounded-2xl bg-secondary/80 border border-border flex items-start gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-semibold text-foreground text-[11px]">99.99% Uptime SLA</div>
+                  <div className="text-[10px] text-muted-foreground">Serverless Edge Cloud</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-secondary/80 border border-border flex items-start gap-2.5">
+                <Clock className="w-4 h-4 text-butter-foreground shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-semibold text-foreground text-[11px]">14-Day Delivery</div>
+                  <div className="text-[10px] text-muted-foreground">Rapid MVP Cadence</div>
+                </div>
+              </div>
+
+              <div className="p-3 rounded-2xl bg-secondary/80 border border-border flex items-start gap-2.5">
+                <ShieldCheck className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-semibold text-foreground text-[11px]">100% IP Ownership</div>
+                  <div className="text-[10px] text-muted-foreground">SOC2 & NDA Protected</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Bottom Bar with Copyright, Legal & Back-To-Top */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span>© {currentYear} My Planet Services Inc. All rights reserved.</span>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-6 text-xs">
             <Link to="/faq" className="hover:text-foreground transition-colors">
               Privacy Policy
             </Link>
@@ -853,8 +976,19 @@ export function SiteFooter() {
               Terms of Service
             </Link>
             <Link to="/faq" className="hover:text-foreground transition-colors">
-              Security & SOC2
+              Security & Compliance
             </Link>
+
+            {/* Back to top smooth button */}
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary hover:bg-secondary/80 text-foreground font-mono text-[11px] transition-colors cursor-pointer ml-2"
+              title="Scroll back to top"
+            >
+              <ArrowUp className="w-3.5 h-3.5" />
+              <span>Back to top</span>
+            </button>
           </div>
         </div>
       </div>

@@ -117,9 +117,9 @@ export function ProjectConfigurator() {
 
       {/* Date & Turnaround Dual Pills */}
       <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="rounded-2xl bg-white/5 border border-white/10 p-3.5 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-butter shrink-0">
-            <Calendar className="w-4 h-4" />
+        <div className="rounded-2xl bg-white/5 border border-white/10 p-3.5 flex items-center gap-3 group">
+          <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-butter shrink-0 animate-icon-float">
+            <Calendar className="w-4 h-4 animate-icon-wiggle" />
           </div>
           <div className="min-w-0">
             <div className="text-[10px] text-zinc-400 font-medium">Kickoff Window</div>
@@ -127,9 +127,9 @@ export function ProjectConfigurator() {
           </div>
         </div>
 
-        <div className="rounded-2xl bg-white/5 border border-white/10 p-3.5 flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-butter shrink-0">
-            <Clock className="w-4 h-4" />
+        <div className="rounded-2xl bg-white/5 border border-white/10 p-3.5 flex items-center gap-3 group">
+          <div style={{ animationDelay: '0.4s' }} className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-butter shrink-0 animate-icon-float">
+            <Clock className="w-4 h-4 animate-icon-pulse" />
           </div>
           <div className="min-w-0">
             <div className="text-[10px] text-zinc-400 font-medium">Cadence</div>

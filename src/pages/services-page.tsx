@@ -200,8 +200,8 @@ export function ServicesPage() {
             <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-start">
               {/* Left Details */}
               <div className="text-left">
-                <div className="w-14 h-14 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center mb-6 shadow-sm">
-                  <Icon className="w-7 h-7" />
+                <div className="w-14 h-14 rounded-2xl bg-butter text-butter-foreground flex items-center justify-center mb-6 shadow-sm animate-icon-float animate-icon-glow">
+                  <Icon className="w-7 h-7 animate-icon-pulse group-hover:scale-120 transition-transform" />
                 </div>
                 <h2 className="font-display text-2xl sm:text-3xl font-medium tracking-tight text-foreground mb-3">
                   {activeDiscipline.title}
@@ -274,7 +274,7 @@ export function ServicesPage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {DISCIPLINES.map((d) => {
+            {DISCIPLINES.map((d, dIdx) => {
               const CardIcon = d.icon;
               return (
                 <div
@@ -282,8 +282,26 @@ export function ServicesPage() {
                   className="rounded-3xl border border-border bg-card p-7 text-left flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-soft group"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-6 text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors">
-                      <CardIcon className="w-6 h-6" />
+                    <div
+                      style={{ animationDelay: `${dIdx * 0.3}s` }}
+                      className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center mb-6 text-foreground group-hover:bg-butter group-hover:text-butter-foreground transition-colors animate-icon-float"
+                    >
+                      <CardIcon
+                        style={{ animationDelay: `${dIdx * 0.2}s` }}
+                        className={`w-6 h-6 transition-transform duration-300 group-hover:scale-120 ${
+                          dIdx === 0
+                            ? 'animate-icon-spin'
+                            : dIdx === 1
+                            ? 'animate-icon-wiggle'
+                            : dIdx === 2
+                            ? 'animate-icon-wiggle'
+                            : dIdx === 3
+                            ? 'animate-icon-pulse'
+                            : dIdx === 4
+                            ? 'animate-icon-sway'
+                            : 'animate-icon-bob'
+                        }`}
+                      />
                     </div>
                     <h3 className="font-display text-xl font-medium tracking-tight text-foreground mb-2">
                       {d.title}
